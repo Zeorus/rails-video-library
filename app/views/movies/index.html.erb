@@ -1,0 +1,23 @@
+<div id="results-container">
+  <% if  @results != nil %>
+    <% @results.each do |movie| %>
+      <div class="movie-card">
+        <div class="img-card-container">
+          <% if movie["i"] != nil %>
+            <%= image_tag(movie["i"]["imageUrl"]) %>
+          <% else %>
+            <%= image_tag("missing_img") %>
+          <% end %>
+        </div>
+        <div class="content-card-container">
+          <h6 class="movie-title"><%= movie["l"] %></h6>
+          <p><%= movie["y"] %>, <%= movie["q"] == "feature" ? "Film" : movie["q"] %></p>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Désolé, aucun film trouvé</p>
+  <% end %>
+</div>
+
+<% console %>

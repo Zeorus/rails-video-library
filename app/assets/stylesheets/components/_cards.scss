@@ -1,0 +1,22 @@
+.movie-card {
+  color: white;
+}
+
+.img-card-container {
+  width: 290px;
+  height: 400px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+}
+
+.content-card-container {
+  padding: 8px;
+}
+
+.movie-title {
+  font-weight: bold;
+}
