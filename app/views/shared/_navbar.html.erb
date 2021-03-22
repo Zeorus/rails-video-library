@@ -24,12 +24,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <div id="movies-searchbar">
-        <%= form_tag root_path, method: :get do %>
+        <%= form_tag movies_path, method: :get do %>
           <div class="laptop-searchbar">
             <%= text_field_tag :query,
             params[:query],
             class: "input-form",
-            placeholder: "Titres, Réalisateurs, Acteurs"
+            placeholder: "Rechercher un film"
             %>
             <button type="submit">
               <i class="fas fa-search"></i>
