@@ -11,3 +11,22 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+body {
+  background-color: #141414;
+  color: grey;
+}
+
+a {
+  text-decoration: none !important;
+  color: inherit;
+  background-color: transparent;
+
+  &:hover {
+    color:inherit;
+  }
+}
+
+#page-container {
+  margin: 68px 60px 24px 60px;
+}
