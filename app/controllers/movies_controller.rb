@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
       request = Net::HTTP::Get.new(url)
-      request["x-rapidapi-key"] = ENV['IMDB_KEY']
+      request["x-rapidapi-key"] = ENV['RAPIDAPI_KEY']
       request["x-rapidapi-host"] = 'imdb8.p.rapidapi.com'
 
       response = http.request(request)
