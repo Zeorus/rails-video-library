@@ -35,9 +35,16 @@ gem 'devise'
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
-group :development, :test do
-  gem 'pry-byebug'
-  gem 'pry-rails'
+
+group :development, :test do  
+  gem 'brakeman' # https://github.com/presidentbeef/brakeman
+  gem 'bundler-audit' # https://github.com/rubysec/bundler-audit
+  gem 'fabrication', '~> 2.21', '>= 2.21.1' # https://github.com/paulelliott/fabrication
+  gem 'faker', '~> 2.13' # https://github.com/faker-ruby/faker
+  gem 'pry-byebug' # https://github.com/deivid-rodriguez/pry-byebug
+  gem 'pry-clipboard' # https://github.com/hotchpotch/pry-clipboard
+  gem 'pry-rails' # https://github.com/rweng/pry-rails
+  gem 'rspec-rails' # https://github.com/rspec/rspec-rails
   gem 'dotenv-rails'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -53,6 +60,10 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'annotate' # https://github.com/ctran/annotate_models
+  gem 'rubocop' # https://github.com/rubocop-hq/rubocop
+  gem 'rubocop-rails' # https://github.com/rubocop-hq/rubocop-rails
+  gem 'rubocop-rspec', '~> 2.0.0.pre' # https://github.com/rubocop-hq/rubocop-rspec
 end
 
 group :test do

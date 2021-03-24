@@ -5,9 +5,8 @@ class MoviesController < ApplicationController
     return unless params[:query].present?
 
     url = URI("https://movies-tvshows-data-imdb.p.rapidapi.com/?type=get-movies-by-title&title=#{params[:query]}")
-
     results = JSON.parse(build_request(url).body)["movie_results"]
-
+    
     @movies = []
 
     return if results == nil
