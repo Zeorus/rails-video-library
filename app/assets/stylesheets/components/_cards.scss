@@ -1,10 +1,13 @@
 .movie-card {
   color: white;
+  display: flex;
+  background-color: #181818;
+  border-radius: 10px;
 }
 
 .img-card-container {
-  width: 290px;
-  height: 400px;
+  width: 145px;
+  height: 200px;
 
   img {
     width: 100%;
@@ -15,8 +18,39 @@
 
 .content-card-container {
   padding: 8px;
+  overflow: hidden;
+  position: relative;
+  flex-grow: 1;
+
+  p {
+    font-size: 12px;
+  }
 }
 
 .movie-title {
   font-weight: bold;
+}
+
+.movie-user-actions {
+  position: absolute;
+  padding: 8px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+
+  .fa-plus {
+    margin-right: 16px;
+  }
+
+  i {
+    font-size: 32px;
+    opacity: 0.5;
+    
+    &:hover {
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
 }

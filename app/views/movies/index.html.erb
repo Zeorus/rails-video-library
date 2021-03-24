@@ -11,6 +11,12 @@
         </div>
         <div class="content-card-container">
           <h6 class="movie-title"><%= movie["title"] %></h6>
+          <p class="movie-date"><%= movie["release_date"] %></p>
+          
+          <div class="movie-user-actions">
+            <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+            <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip"></i>
+          </div>
         </div>
       </div>
     <% end %>
