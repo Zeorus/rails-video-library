@@ -34,6 +34,10 @@ gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
 
+gem 'rest-client', '~> 1.8'
+
+gem 'themoviedb'
+
 group :development, :test do  
   gem 'brakeman' # https://github.com/presidentbeef/brakeman
   gem 'bundler-audit' # https://github.com/rubysec/bundler-audit

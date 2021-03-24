@@ -1,23 +1,21 @@
 <div id="results-container">
-  <% if  @movies != [] %>
-    <% @movies.each do |movie| %>
+  <% if  @results != nil %>
+    <% @results.each do |movie| %>
       <div class="movie-card">
         <div class="img-card-container">
-          <% if movie["poster"] != nil %>
-            <%= image_tag(movie["poster"]) %>
+          <% if movie["poster_path"] != nil %>
+            <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}") %>
           <% else %>
             <%= image_tag("missing_img") %>
           <% end %>
         </div>
         <div class="content-card-container">
           <h6 class="movie-title"><%= movie["title"] %></h6>
-          <p><%= movie["year"] %></p>
         </div>
       </div>
     <% end %>
   <% else %>
     <p>Désolé, aucun film trouvé</p>
   <% end %>
-</div>
 
-<% console %>
+</div>
