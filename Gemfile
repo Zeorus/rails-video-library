@@ -38,7 +38,7 @@ gem 'rest-client', '~> 1.8'
 
 gem 'themoviedb'
 
-group :development, :test do  
+group :development, :test do
   gem 'brakeman' # https://github.com/presidentbeef/brakeman
   gem 'bundler-audit' # https://github.com/rubysec/bundler-audit
   gem 'fabrication', '~> 2.21', '>= 2.21.1' # https://github.com/paulelliott/fabrication

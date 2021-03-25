@@ -1,0 +1,20 @@
+=> [[32m#<Movie:0x0000558d5a92bf98[0m
+  id: [1;34m1[0m,
+  title: [31m[1;31m"[0m[31mMatrix[1;31m"[0m[31m[0m,
+  sinopsis:
+   [31m[1;31m"[0m[31mProgrammeur anonyme dans un service administratif le jour, Thomas Anderson devient Neo la nuit venue. Sous ce pseudonyme, il est l’un des pirates les plus recherchés du cyber‐espace. À cheval entre deux mondes, Neo est assailli par d’étranges songes et des messages cryptés provenant d’un certain Morpheus. Celui‐ci l’exhorte à aller au‐delà des apparences et à trouver la réponse à la question qui hante constamment ses pensées : qu’est‐ce que la Matrice ? Nul ne le sait, et aucun homme n’est encore parvenu à en percer les défenses. Mais Morpheus est persuadé que Neo est l’Élu, le libérateur mythique de l’humanité annoncé selon la prophétie. Ensemble, ils se lancent dans une lutte sans retour contre la Matrice et ses terribles agents…[1;31m"[0m[31m[0m,
+  year: [31m[1;31m"[0m[31m1999-03-30[1;31m"[0m[31m[0m,
+  poster_path: [31m[1;31m"[0m[31m/pEoqbqtLc4CcwDUDqxmEDSWpWTZ.jpg[1;31m"[0m[31m[0m,
+  created_at: [1;34;4mThu[0m, [1;34m25[0m [1;34;4mMar[0m [1;34m2021[0m [1;34m06[0m:[1;34m18[0m:[1;35m19.877351000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  updated_at: [1;34;4mThu[0m, [1;34m25[0m [1;34;4mMar[0m [1;34m2021[0m [1;34m06[0m:[1;34m18[0m:[1;35m19.877351000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  tmdb_id: [1;34m603[0m[32m>[0m,
+ [32m#<Movie:0x0000558d5a92b9f8[0m
+  id: [1;34m1[0m,
+  title: [31m[1;31m"[0m[31mMatrix[1;31m"[0m[31m[0m,
+  sinopsis:
+   [31m[1;31m"[0m[31mProgrammeur anonyme dans un service administratif le jour, Thomas Anderson devient Neo la nuit venue. Sous ce pseudonyme, il est l’un des pirates les plus recherchés du cyber‐espace. À cheval entre deux mondes, Neo est assailli par d’étranges songes et des messages cryptés provenant d’un certain Morpheus. Celui‐ci l’exhorte à aller au‐delà des apparences et à trouver la réponse à la question qui hante constamment ses pensées : qu’est‐ce que la Matrice ? Nul ne le sait, et aucun homme n’est encore parvenu à en percer les défenses. Mais Morpheus est persuadé que Neo est l’Élu, le libérateur mythique de l’humanité annoncé selon la prophétie. Ensemble, ils se lancent dans une lutte sans retour contre la Matrice et ses terribles agents…[1;31m"[0m[31m[0m,
+  year: [31m[1;31m"[0m[31m1999-03-30[1;31m"[0m[31m[0m,
+  poster_path: [31m[1;31m"[0m[31m/pEoqbqtLc4CcwDUDqxmEDSWpWTZ.jpg[1;31m"[0m[31m[0m,
+  created_at: [1;34;4mThu[0m, [1;34m25[0m [1;34;4mMar[0m [1;34m2021[0m [1;34m06[0m:[1;34m18[0m:[1;35m19.877351000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  updated_at: [1;34;4mThu[0m, [1;34m25[0m [1;34;4mMar[0m [1;34m2021[0m [1;34m06[0m:[1;34m18[0m:[1;35m19.877351000[0m [1;34;4mUTC[0m [1;34m+00[0m:[1;34m00[0m,
+  tmdb_id: [1;34m603[0m[32m>[0m]

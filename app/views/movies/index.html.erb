@@ -4,7 +4,7 @@
       <div class="movie-card">
         <div class="img-card-container">
           <% if movie["poster_path"] != nil %>
-            <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}") %>
+            <%= image_tag("https://image.tmdb.org/t/p/w500#{movie["poster_path"]}") %>
           <% else %>
             <%= image_tag("missing_img") %>
           <% end %>
@@ -14,8 +14,21 @@
           <p class="movie-date"><%= movie["release_date"] %></p>
           
           <div class="movie-user-actions">
-            <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
-            <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip"></i>
+            <% if library_item = LibraryItem.find_by(user_id: current_user.id, movie_tmdb_id: movie["id"]) %>
+              <% if library_item.to_watch == true %>
+                <i class="fas fa-plus i-active" title="Retirer de Ma Liste" data-toggle="tooltip" data-movieid="<%= movie["id"] %>" ></i>
+              <% else %>
+                <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip" data-movieid="<%= movie["id"] %>" ></i>
+              <% end %>
+              <% if library_item.in_library == true %>
+                <i class="fas fa-video i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+              <% else %>
+                <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+              <% end %>
+            <% else %>
+              <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip" data-movieid="<%= movie["id"] %>" ></i>
+              <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+            <% end %>
           </div>
         </div>
       </div>

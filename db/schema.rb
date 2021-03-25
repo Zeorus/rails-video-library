@@ -10,20 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_24_151452) do
+ActiveRecord::Schema.define(version: 2021_03_25_084842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.integer "tmdb_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "library_items", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "movie_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "to_watch?", default: false
-    t.boolean "in_library?", default: false
+    t.boolean "to_watch", default: false
+    t.boolean "in_library", default: false
+    t.integer "movie_tmdb_id"
     t.index ["movie_id"], name: "index_library_items_on_movie_id"
     t.index ["user_id"], name: "index_library_items_on_user_id"
+  end
+
+  create_table "movie_genres", force: :cascade do |t|
+    t.bigint "genre_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre_id"], name: "index_movie_genres_on_genre_id"
+    t.index ["movie_id"], name: "index_movie_genres_on_movie_id"
   end
 
   create_table "movies", force: :cascade do |t|
@@ -33,6 +50,7 @@ ActiveRecord::Schema.define(version: 2021_03_24_151452) do
     t.string "poster_path"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "tmdb_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -49,4 +67,6 @@ ActiveRecord::Schema.define(version: 2021_03_24_151452) do
 
   add_foreign_key "library_items", "movies"
   add_foreign_key "library_items", "users"
+  add_foreign_key "movie_genres", "genres"
+  add_foreign_key "movie_genres", "movies"
 end
