@@ -1,0 +1,56 @@
+name: Ruby
+
+on:
+  push:
+    branches: [master]
+  pull_request: {}
+
+env:
+  DATABASE_URL: postgres://postgres:test@127.0.0.1:5432/test
+
+jobs:
+  lint_and_security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Retreive repository
+        uses: actions/checkout@v2
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.6.6
+      - name: Install dependencies
+        run: bundle
+      - name: Bundle audit
+        run: bundle audit check --update
+      - name: Rubocop Linter
+        run: rubocop
+      - name: Brakeman
+        run: brakeman
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:12
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: test
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: --entrypoint redis-server
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.6.6
+        bundler-cache: true
+    - name: Create database
+      run: |
+        bundle exec bin/rails db:create db:migrate RAILS_ENV=test
+    - name: Run tests
+      run: bundle exec rails spec

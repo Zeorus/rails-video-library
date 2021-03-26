@@ -134,13 +134,21 @@ GEM
       mimemagic (~> 0.3.2)
     method_source (1.0.0)
     mime-types (2.99.3)
-    mimemagic (0.3.5)
+    mimemagic (0.3.9)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
+    mini_portile2 (2.5.0)
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_xml (0.6.0)
+    mutations (0.9.1)
+      activesupport
     netrc (0.11.0)
     nio4r (2.5.7)
+    nokogiri (1.11.2)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     nokogiri (1.11.2-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
@@ -310,6 +318,7 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES
@@ -327,6 +336,7 @@ DEPENDENCIES
   font-awesome-sass
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  mutations (~> 0.9.1)
   pg (~> 1.1)
   pry-byebug
   pry-clipboard

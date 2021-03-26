@@ -1,53 +1,37 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.3'
-# Use postgresql as the database for Active Record
-gem 'pg', '~> 1.1'
-# Use Puma as the app server
-gem 'puma', '~> 5.0'
-# Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 5.0'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
-# Use Redis adapter to run Action Cable in production
-gem 'redis', '~> 4.0'
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
-
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
-
-# Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.4', require: false
-
-gem 'devise'
-
 gem 'autoprefixer-rails'
+gem 'bootsnap', '>= 1.4.4', require: false
+gem 'devise'
 gem 'font-awesome-sass'
-gem 'simple_form'
-
+gem 'jbuilder', '~> 2.7'
+gem 'mutations', '~> 0.9.1'
+gem 'pg', '~> 1.1'
+gem 'puma', '~> 5.0'
+gem 'rails', '~> 6.1.3'
+gem 'redis', '~> 4.0'
 gem 'rest-client', '~> 1.8'
-
+gem 'sass-rails', '>= 6'
+gem 'simple_form'
 gem 'themoviedb'
+gem 'turbolinks', '~> 5'
+gem 'webpacker', '~> 5.0'
 
 group :development, :test do
   gem 'brakeman' # https://github.com/presidentbeef/brakeman
   gem 'bundler-audit' # https://github.com/rubysec/bundler-audit
+  gem 'dotenv-rails'
   gem 'fabrication', '~> 2.21', '>= 2.21.1' # https://github.com/paulelliott/fabrication
   gem 'faker', '~> 2.13' # https://github.com/faker-ruby/faker
   gem 'pry-byebug' # https://github.com/deivid-rodriguez/pry-byebug
   gem 'pry-clipboard' # https://github.com/hotchpotch/pry-clipboard
   gem 'pry-rails' # https://github.com/rweng/pry-rails
   gem 'rspec-rails' # https://github.com/rspec/rspec-rails
-  gem 'dotenv-rails'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -58,14 +42,14 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
+  gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
   gem 'annotate' # https://github.com/ctran/annotate_models
   gem 'rubocop' # https://github.com/rubocop-hq/rubocop
   gem 'rubocop-rails' # https://github.com/rubocop-hq/rubocop-rails
   gem 'rubocop-rspec', '~> 2.0.0.pre' # https://github.com/rubocop-hq/rubocop-rspec
+  gem 'spring'
 end
 
 group :test do
