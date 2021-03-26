@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class MoviesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index]
 
   Tmdb::Api.key(ENV['TMDB_API_KEY'])
-  Tmdb::Api.language("fr")
+  Tmdb::Api.language('fr')
 
   def index
     return unless params[:query].present?
@@ -35,28 +37,26 @@ class MoviesController < ApplicationController
     head :no_content
   end
 
-  def user_library
-  end
+  def user_library; end
 
-  def user_list
-  end
+  def user_list; end
 
   private
 
   def create(movie_tmdb_id)
     movie_from_api = Tmdb::Movie.detail(movie_tmdb_id)
-    movie = Movie.create!(title: movie_from_api["title"],
-                          poster_path: movie_from_api["poster_path"],
-                          sinopsis: movie_from_api["overview"],
-                          year: movie_from_api["release_date"],
+    movie = Movie.create!(title: movie_from_api['title'],
+                          poster_path: movie_from_api['poster_path'],
+                          sinopsis: movie_from_api['overview'],
+                          year: movie_from_api['release_date'],
                           tmdb_id: movie_tmdb_id)
-    movie_from_api["genres"].each do |genre|
+    movie_from_api['genres'].each do |genre|
       movie_genre = MovieGenre.new
-      movie_genre.genre = Genre.find_by(tmdb_id: genre["id"])
+      movie_genre.genre = Genre.find_by(tmdb_id: genre['id'])
       movie_genre.movie = movie
       movie_genre.save
     end
-    return movie
+    movie
   end
 
   def create_library_item(movie)
@@ -65,6 +65,6 @@ class MoviesController < ApplicationController
     library_item.user = current_user
     library_item.movie_tmdb_id = movie.tmdb_id
     library_item.save
-    return library_item
+    library_item
   end
 end
