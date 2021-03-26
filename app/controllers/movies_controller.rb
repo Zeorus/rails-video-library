@@ -25,14 +25,14 @@ class MoviesController < ApplicationController
       library_item = create_library_item(movie)
       library_item.update(in_library: true)
     end
-    render nothing: true
+    head :no_content
   end
 
   def remove_to_library
     movie = Movie.find_by(tmdb_id: params[:movieId].to_i)
     library_item = LibraryItem.find_by(user_id: current_user.id, movie_id: movie.id)
     library_item.update(in_library: false)
-    render nothing: true
+    head :no_content
   end
 
   def user_library
