@@ -22,5 +22,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  has_many :library_items
   has_many :movies, through: :library_items
 end

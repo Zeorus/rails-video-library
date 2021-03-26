@@ -16,11 +16,14 @@ ActiveStorage.start()
 import "bootstrap";
 
 // Internal imports
+import { updateToLibrary } from "../plugins/add_to_library";
 
 document.addEventListener('turbolinks:load', () => {
   
   $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
   });
+
+  updateToLibrary()
 
 });
