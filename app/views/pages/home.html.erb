@@ -1,2 +1,8 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h2>Les plus populaires</h2>
+<%= render '/shared/caroussel', movies: @most_popular_movies, caroussel_id: "1" %>
+<br>
+<h2>Meilleurs films de 2020</h2>
+<%= render '/shared/caroussel', movies: @best_2020_movies, caroussel_id: "2" %>
+<br>
+<h2>Les mieux notés</h2>
+<%= render '/shared/caroussel', movies: @best_movies, caroussel_id: "3" %>

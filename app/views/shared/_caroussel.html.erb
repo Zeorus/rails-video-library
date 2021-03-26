@@ -1,0 +1,154 @@
+<div class="row d-flex align-items-center caroussel-movie">
+  <div class="d-flex align-items-center btn-caroussel-left">
+      <a href="#carouselIndicators<%= caroussel_id %>" role="button" data-slide="prev">
+        <div class="carousel-nav-icon">
+          <i class="fas fa-chevron-left"></i>
+        </div>
+      </a>
+  </div>
+  <div class="col-12">
+      <!--Start carousel-->
+      <div id="carouselIndicators<%= caroussel_id %>" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="row">
+              <div class="col-12 caroussel-row">
+                <% movies[0..3].each do |movie| %>
+                  <div class="movie-card">
+                    <div class="img-card-container">
+                      <% if movie["poster_path"] != nil %>
+                        <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}") %>
+                      <% else %>
+                        <%= image_tag("missing_img") %>
+                      <% end %>
+                    </div>
+                    <div class="content-card-container">
+                      <h6 class="movie-title"><%= movie["title"] %></h6>
+                      <p class="movie-date"><%= movie["release_date"] %></p>
+                      <div class="movie-user-actions">
+                        <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+                        <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip"></i>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-12 caroussel-row">
+                <% movies[4..7].each do |movie| %>
+                  <div class="movie-card">
+                    <div class="img-card-container">
+                      <% if movie["poster_path"] != nil %>
+                        <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}") %>
+                      <% else %>
+                        <%= image_tag("missing_img") %>
+                      <% end %>
+                    </div>
+                    <div class="content-card-container">
+                      <h6 class="movie-title"><%= movie["title"] %></h6>
+                      <p class="movie-date"><%= movie["release_date"] %></p>
+                      <div class="movie-user-actions">
+                        <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+                        <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip"></i>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-12 caroussel-row">
+                <% movies[8..11].each do |movie| %>
+                  <div class="movie-card">
+                    <div class="img-card-container">
+                      <% if movie["poster_path"] != nil %>
+                        <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}") %>
+                      <% else %>
+                        <%= image_tag("missing_img") %>
+                      <% end %>
+                    </div>
+                    <div class="content-card-container">
+                      <h6 class="movie-title"><%= movie["title"] %></h6>
+                      <p class="movie-date"><%= movie["release_date"] %></p>
+                      <div class="movie-user-actions">
+                        <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+                        <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip"></i>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-12 caroussel-row">
+                <% movies[12..15].each do |movie| %>
+                  <div class="movie-card">
+                    <div class="img-card-container">
+                      <% if movie["poster_path"] != nil %>
+                        <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}") %>
+                      <% else %>
+                        <%= image_tag("missing_img") %>
+                      <% end %>
+                    </div>
+                    <div class="content-card-container">
+                      <h6 class="movie-title"><%= movie["title"] %></h6>
+                      <p class="movie-date"><%= movie["release_date"] %></p>
+                      <div class="movie-user-actions">
+                        <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+                        <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip"></i>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="row">
+              <div class="col-12 caroussel-row">
+                <% movies[16..19].each do |movie| %>
+                  <div class="movie-card">
+                    <div class="img-card-container">
+                      <% if movie["poster_path"] != nil %>
+                        <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}") %>
+                      <% else %>
+                        <%= image_tag("missing_img") %>
+                      <% end %>
+                    </div>
+                    <div class="content-card-container">
+                      <h6 class="movie-title"><%= movie["title"] %></h6>
+                      <p class="movie-date"><%= movie["release_date"] %></p>
+                      <div class="movie-user-actions">
+                        <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+                        <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip"></i>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--End carousel-->
+  </div>
+  <div class="d-flex align-items-center justify-content-center btn-caroussel-right">
+    <a  href="#carouselIndicators<%= caroussel_id %>" data-slide="next">
+      <div class="carousel-nav-icon">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+    </a>
+  </div>
+</div>

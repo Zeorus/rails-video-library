@@ -1,0 +1,32 @@
+.caroussel-movie {
+  position: relative;
+}
+
+.btn-caroussel-left {
+  position: absolute;
+  left: -20px;
+}
+
+.btn-caroussel-right {
+  position: absolute;
+  right: -20px;
+}
+
+.carousel-nav-icon {
+  i {
+    font-size: 32px;
+    color: white;
+  }
+}
+.carousel-item {
+  .col, .col-sm, .col-md {
+    width: 145px;
+    height: 200px;
+  }
+}
+
+.caroussel-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 16px;
+}
