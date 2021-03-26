@@ -1,5 +1,28 @@
-<% unless current_user.movies == [] %>
-
-<% else %>
-  <p>Votre vidéothèque est vide.</p>
-<% end %>
+<h2 class="section-title">Ma Vidéothèque</h2>
+<div id="results-container">
+  <% unless current_user.movies == [] %>
+    <% @movies.each do |movie| %>
+      <div class="movie-card">
+          <div class="img-card-container">
+            <% if movie["poster_path"] != nil %>
+              <%= image_tag("https://image.tmdb.org/t/p/w500#{movie.poster_path}") %>
+            <% else %>
+              <%= image_tag("missing_img") %>
+            <% end %>
+          </div>
+          <div class="content-card-container">
+            <h6 class="movie-title"><%= movie.title %></h6>
+            <div class="d-flex">
+              <div class="movie-date"><%= movie.year %></div>
+              <div class="movie-user-actions">
+                <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+                <i class="fas fa-video i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie.tmdb_id %>"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  <% else %>
+    <p>Votre vidéothèque est vide.</p>
+  <% end %>
+</div>

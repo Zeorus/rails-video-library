@@ -26,7 +26,9 @@ class MoviesController < ApplicationController
     head :no_content
   end
 
-  def user_library; end
+  def user_library
+    @movies = Movie.joins(:library_items).where(library_items: { user_id: current_user.id })
+  end
 
   def user_list; end
 end
