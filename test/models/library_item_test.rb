@@ -13,8 +13,9 @@
 #
 # Indexes
 #
-#  index_library_items_on_movie_id  (movie_id)
-#  index_library_items_on_user_id   (user_id)
+#  index_library_items_on_movie_id              (movie_id)
+#  index_library_items_on_user_id               (user_id)
+#  index_library_items_on_user_id_and_movie_id  (user_id,movie_id) UNIQUE
 #
 # Foreign Keys
 #

@@ -10,6 +10,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'font-awesome-sass'
 gem 'jbuilder', '~> 2.7'
+gem 'mutations', '~> 0.9.1'
 gem 'pg', '~> 1.1'
 gem 'puma', '~> 5.0'
 gem 'rails', '~> 6.1.3'

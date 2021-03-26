@@ -142,6 +142,8 @@ GEM
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_xml (0.6.0)
+    mutations (0.9.1)
+      activesupport
     netrc (0.11.0)
     nio4r (2.5.7)
     nokogiri (1.11.2)
@@ -334,6 +336,7 @@ DEPENDENCIES
   font-awesome-sass
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  mutations (~> 0.9.1)
   pg (~> 1.1)
   pry-byebug
   pry-clipboard
