@@ -14,21 +14,12 @@
           <p class="movie-date"><%= movie["release_date"] %></p>
           
           <div class="movie-user-actions">
-            <% if library_item = LibraryItem.find_by(user_id: current_user.id, movie_tmdb_id: movie["id"]) %>
-              <% if library_item.to_watch == true %>
-                <i class="fas fa-plus i-active" title="Retirer de Ma Liste" data-toggle="tooltip" data-movieid="<%= movie["id"] %>" ></i>
-              <% else %>
-                <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip" data-movieid="<%= movie["id"] %>" ></i>
-              <% end %>
-              <% if library_item.in_library == true %>
+              <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip" data-movieid="<%= movie["id"] %>" ></i>
+              <% if LibraryItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["id"] }) %>
                 <i class="fas fa-video i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
               <% else %>
                 <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
               <% end %>
-            <% else %>
-              <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip" data-movieid="<%= movie["id"] %>" ></i>
-              <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
-            <% end %>
           </div>
         </div>
       </div>
