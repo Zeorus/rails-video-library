@@ -4,7 +4,9 @@
 #
 #  id          :bigint           not null, primary key
 #  poster_path :string
+#  runtime     :string
 #  sinopsis    :text
+#  tagline     :string
 #  title       :string
 #  year        :string
 #  created_at  :datetime         not null

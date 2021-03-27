@@ -24,6 +24,8 @@ module Movies
         poster_path: movie['poster_path'],
         sinopsis: movie['overview'],
         year: movie['release_date'],
+        tagline: movie['tagline'],
+        runtime: movie['runtime'],
         genres: Genre.where(tmdb_id: movie['genres'].map { |genre| genre['id'] })
       ).find_or_create_by(tmdb_id: tmdb_movie_id)
     end

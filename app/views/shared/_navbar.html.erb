@@ -5,13 +5,13 @@
     <% end %>
 
     <ul class="navbar-menu">
-      <li>
+      <li class="<%= 'active' if current_page?(root_path) %>">
         <%= link_to "Accueil", "/" %>
       </li>
-      <li>
+      <li class="<%= 'active' if current_page?(list_path) %>">
         <%= link_to "Ma Liste", list_path %>
       </li>
-      <li>
+      <li class="<%= 'active' if current_page?(library_path) %>">
         <%= link_to "<i class='fas fa-video'></i> Ma Vidéothèque".html_safe, library_path %>
       </li>
     </ul>

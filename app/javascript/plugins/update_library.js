@@ -1,6 +1,6 @@
-const updateToLibrary = () => {
-  if (document.querySelector('.fa-video')) {
-    const addIcons = document.querySelectorAll('.fa-video')
+const updateLibrary = () => {
+  if (document.querySelector('.icon-library')) {
+    const addIcons = document.querySelectorAll('.icon-library')
     addIcons.forEach((icon) => {
       icon.addEventListener('click', (event) => {
         const target = event.currentTarget
@@ -28,4 +28,4 @@ const updateToLibrary = () => {
   }
 }
 
-export { updateToLibrary };
+export { updateLibrary };
