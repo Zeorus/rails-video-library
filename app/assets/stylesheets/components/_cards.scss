@@ -1,16 +1,11 @@
 .movie-card {
   color: white;
-  display: flex;
-  background-color: #181818;
   border-radius: 4px;
-  width: 100%;
-  height: 100%;
+  width: 145px;
+  margin: 0 auto;
 }
 
 .img-card-container {
-  width: 145px;
-  height: 200px;
-
   img {
     width: 145px;
     height: 200px;
@@ -19,35 +14,31 @@
 }
 
 .content-card-container {
-  padding: 8px;
+  padding-top: 8px;
   overflow: hidden;
-  position: relative;
-  flex-grow: 1;
 
-  p {
-    font-size: 12px;
+  .movie-title {
+    font-weight: bold;
+  }
+  
+  .movie-date {
+    font-size: 10px;
+    flex-grow: 1;
+    opacity: 0.5;
+    margin: 0;
   }
 }
 
-.movie-title {
-  font-weight: bold;
-}
-
 .movie-user-actions {
-  position: absolute;
-  padding: 8px;
-  width: 100%;
-  bottom: 0;
-  left: 0;
   display: flex;
   justify-content: flex-end;
 
   .fa-plus {
-    margin-right: 16px;
+    margin-right: 8px;
   }
 
   i {
-    font-size: 32px;
+    font-size: 14px;
     opacity: 0.5;
     
     &:hover {

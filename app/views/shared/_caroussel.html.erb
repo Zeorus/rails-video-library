@@ -13,7 +13,7 @@
           <div class="carousel-item active">
             <div class="row">
               <div class="col-12 caroussel-row">
-                <% movies[0..3].each do |movie| %>
+                <% movies[0..7].each do |movie| %>
                   <div class="movie-card">
                     <div class="img-card-container">
                       <% if movie["poster_path"] != nil %>
@@ -24,10 +24,16 @@
                     </div>
                     <div class="content-card-container">
                       <h6 class="movie-title"><%= movie["title"] %></h6>
-                      <p class="movie-date"><%= movie["release_date"] %></p>
-                      <div class="movie-user-actions">
-                        <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
-                        <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip"></i>
+                      <div class="d-flex">
+                        <div class="movie-date"><%= movie["release_date"] %></div>
+                        <div class="movie-user-actions">
+                          <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+                          <% if LibraryItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["id"] }) %>
+                            <i class="fas fa-video i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+                          <% else %>
+                            <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+                          <% end %>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -39,7 +45,7 @@
           <div class="carousel-item">
             <div class="row">
               <div class="col-12 caroussel-row">
-                <% movies[4..7].each do |movie| %>
+                <% movies[8..15].each do |movie| %>
                   <div class="movie-card">
                     <div class="img-card-container">
                       <% if movie["poster_path"] != nil %>
@@ -50,10 +56,16 @@
                     </div>
                     <div class="content-card-container">
                       <h6 class="movie-title"><%= movie["title"] %></h6>
-                      <p class="movie-date"><%= movie["release_date"] %></p>
-                      <div class="movie-user-actions">
-                        <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
-                        <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip"></i>
+                      <div class="d-flex">
+                        <div class="movie-date"><%= movie["release_date"] %></div>
+                        <div class="movie-user-actions">
+                          <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+                          <% if LibraryItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["id"] }) %>
+                            <i class="fas fa-video i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+                          <% else %>
+                            <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+                          <% end %>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -65,7 +77,7 @@
           <div class="carousel-item">
             <div class="row">
               <div class="col-12 caroussel-row">
-                <% movies[8..11].each do |movie| %>
+                <% movies[16..23].each do |movie| %>
                   <div class="movie-card">
                     <div class="img-card-container">
                       <% if movie["poster_path"] != nil %>
@@ -76,10 +88,16 @@
                     </div>
                     <div class="content-card-container">
                       <h6 class="movie-title"><%= movie["title"] %></h6>
-                      <p class="movie-date"><%= movie["release_date"] %></p>
-                      <div class="movie-user-actions">
-                        <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
-                        <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip"></i>
+                      <div class="d-flex">
+                        <div class="movie-date"><%= movie["release_date"] %></div>
+                        <div class="movie-user-actions">
+                          <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+                          <% if LibraryItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["id"] }) %>
+                            <i class="fas fa-video i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+                          <% else %>
+                            <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+                          <% end %>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -91,7 +109,7 @@
           <div class="carousel-item">
             <div class="row">
               <div class="col-12 caroussel-row">
-                <% movies[12..15].each do |movie| %>
+                <% movies[24..31].each do |movie| %>
                   <div class="movie-card">
                     <div class="img-card-container">
                       <% if movie["poster_path"] != nil %>
@@ -102,10 +120,16 @@
                     </div>
                     <div class="content-card-container">
                       <h6 class="movie-title"><%= movie["title"] %></h6>
-                      <p class="movie-date"><%= movie["release_date"] %></p>
-                      <div class="movie-user-actions">
-                        <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
-                        <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip"></i>
+                      <div class="d-flex">
+                        <div class="movie-date"><%= movie["release_date"] %></div>
+                        <div class="movie-user-actions">
+                          <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+                          <% if LibraryItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["id"] }) %>
+                            <i class="fas fa-video i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+                          <% else %>
+                            <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+                          <% end %>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -117,7 +141,7 @@
           <div class="carousel-item">
             <div class="row">
               <div class="col-12 caroussel-row">
-                <% movies[16..19].each do |movie| %>
+                <% movies[32..39].each do |movie| %>
                   <div class="movie-card">
                     <div class="img-card-container">
                       <% if movie["poster_path"] != nil %>
@@ -128,10 +152,16 @@
                     </div>
                     <div class="content-card-container">
                       <h6 class="movie-title"><%= movie["title"] %></h6>
-                      <p class="movie-date"><%= movie["release_date"] %></p>
-                      <div class="movie-user-actions">
-                        <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
-                        <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip"></i>
+                      <div class="d-flex">
+                        <div class="movie-date"><%= movie["release_date"] %></div>
+                        <div class="movie-user-actions">
+                          <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+                          <% if LibraryItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["id"] }) %>
+                            <i class="fas fa-video i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+                          <% else %>
+                            <i class="fas fa-video" title="Ajouter à Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+                          <% end %>
+                        </div>
                       </div>
                     </div>
                   </div>
