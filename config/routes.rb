@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
 
-  resources :movies, only: [ :index ]
+  resources :movies, only: [ :index, :show ] do
+    resources :reviews, only: [ :create, :update ]
+  end
   
   post 'addlibrary', to: 'movies#add_to_library'
   post 'removelibrary', to: 'movies#remove_from_library'

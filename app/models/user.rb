@@ -25,5 +25,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :library_items
+  has_many :reviews
   has_many :movies, through: :library_items
 end

@@ -58,7 +58,12 @@
   li {
     margin: 0 8px;
     color: white;
-  };
+    opacity: 0.5;
+  }
+
+  .active {
+    opacity: 1;
+  }
 }
 
 .laptop-searchbar {

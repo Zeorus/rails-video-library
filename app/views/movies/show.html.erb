@@ -1,0 +1,29 @@
+<div id="show-movie-container">
+  <div id="show-movie-img-container">
+    <%= image_tag("https://image.tmdb.org/t/p/w500#{@movie["poster_path"]}") %>
+  </div>
+  <div id="show-movie-content-container">
+    <h1 id="show-movie-title"><%= @movie.title %></h1>
+    <div class="show-movie-infos">
+      <%= Date.strptime(@movie.year, '%Y-%m-%d').strftime('%d/%m/%Y') %> 
+      <i class="fas fa-circle"></i>
+      <% @movie.genres.each_with_index do |genre, index| %>
+        <%= genre.name %><% if index < @movie.genres.length - 1 %>,<% end %>
+      <% end %>
+      <i class="fas fa-circle"></i>
+      <%= @movie.runtime %> min
+    </div>
+    <p id="show-movie-tagline"><%= @movie.tagline %></p>
+    <h2 class="show-movie-subtitle">Sinopsis</h2>
+    <p id="show-movie-sinopsis"><%= @movie.sinopsis %></p>
+    <h2 class="show-movie-subtitle">Mon avis <i class="fas fa-edit" title="Écrire un avis" data-toggle="tooltip" id="btn-write-review"></i></h2>
+    <% if @review.id != nil %>
+      <%= render 'shared/rate', review: @review %>
+      <p id="show-movie-review"><%= @review.content %></p>
+    <% else %>
+      <p id="show-movie-review">Aucun avis...</p>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'shared/modal_review', movie: @movie, review: @review %>

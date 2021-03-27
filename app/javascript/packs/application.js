@@ -16,7 +16,7 @@ ActiveStorage.start()
 import "bootstrap";
 
 // Internal imports
-import { updateToLibrary } from "../plugins/add_to_library";
+import { updateLibrary } from "../plugins/update_library";
 
 document.addEventListener('turbolinks:load', () => {
   
@@ -24,6 +24,18 @@ document.addEventListener('turbolinks:load', () => {
     $('[data-toggle="tooltip"]').tooltip();
   });
 
-  updateToLibrary()
+  updateLibrary()
+
+  if (document.querySelector('.carousel-item')) {
+    document.querySelector('.carousel-container-1').classList.add('active');
+    document.querySelector('.carousel-container-2').classList.add('active');
+    document.querySelector('.carousel-container-3').classList.add('active');
+  }
+
+  if (document.getElementById('btn-write-review')) {
+    document.getElementById('btn-write-review').addEventListener('click', (event) => {
+      $('#review-form').modal();
+    });
+  }
 
 });

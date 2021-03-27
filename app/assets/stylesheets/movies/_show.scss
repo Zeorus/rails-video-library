@@ -1,0 +1,53 @@
+#show-movie-container {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+
+#show-movie-img-container {
+
+  img {
+    height: calc(100vh - 185px);
+    border-radius: 4px;
+  }
+}
+
+#show-movie-content-container {
+  flex-grow: 1;
+  padding: 24px;
+
+  .fa-edit {
+    margin-left: 8px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+#show-movie-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.show-movie-subtitle {
+  font-size: 22px;
+}
+
+.show-movie-infos {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 14px;
+
+  i {
+    margin: 0 8px;
+    font-size: 4px;
+  }
+}
+
+#show-movie-tagline {
+  font-style: italic;
+  opacity: 0.5;
+  font-size: 18px;
+}

@@ -1,13 +1,21 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
     return unless params[:query].present?
 
     search = Tmdb::Search.new.resource('movie').query(params[:query])
     @results = search.fetch
+  end
+
+  def show
+    @movie = Movie.find(params[:id])
+    @review = Review.joins(:movie).find_by(user_id: current_user.id, movie: { id: @movie.id })
+    if @review == nil
+      @review = Review.new
+    end
   end
 
   def add_to_library

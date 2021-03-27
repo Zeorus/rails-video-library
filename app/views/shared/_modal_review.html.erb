@@ -1,0 +1,22 @@
+<div class="modal fade" id="review-form" tabindex="-1" role="dialog" aria-labelledby="review-modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="review-modal">Mon Avis</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <div aria-hidden="true" class="btn-modal-close">&times;</div>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for([movie, review]) do |f| %>
+          <%= f.input :content, as: :text, label: "Avis", class: 'input-group-text'%>
+          <label class="text required" for="review_content">Note <abbr title="required">*</abbr></label>
+          <br>
+          <%= f.collection_radio_buttons :rate, [[1, 'Mauvais'] ,[2, 'Bof'], [3, 'Correct'], [4, 'Très Bien'], [5, 'Excellent']], :first, :last %>
+          <br>
+          <%= f.submit class: 'btn btn-review' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
