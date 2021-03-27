@@ -18,13 +18,14 @@ module Movies
     end
 
     def movie
+      movie = tmdb_movie
       Movie.create_with(
-        title: tmdb_movie['title'],
-        poster_path: tmdb_movie['poster_path'],
-        sinopsis: tmdb_movie['overview'],
-        year: tmdb_movie['release_date'],
-        genre_ids: Genre.where(tmdb_id: tmdb_movie['genres'].map { |genre| genre['id'] })
-      ).find_or_create_by(tmdb_id: movie_tmdb_id)
+        title: movie['title'],
+        poster_path: movie['poster_path'],
+        sinopsis: movie['overview'],
+        year: movie['release_date'],
+        genres: Genre.where(tmdb_id: movie['genres'].map { |genre| genre['id'] })
+      ).find_or_create_by(tmdb_id: tmdb_movie_id)
     end
   end
 end

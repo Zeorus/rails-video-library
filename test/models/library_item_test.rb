@@ -2,14 +2,11 @@
 #
 # Table name: library_items
 #
-#  id            :bigint           not null, primary key
-#  in_library    :boolean          default(FALSE)
-#  to_watch      :boolean          default(FALSE)
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  movie_id      :bigint           not null
-#  movie_tmdb_id :integer
-#  user_id       :bigint           not null
+#  id         :bigint           not null, primary key
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  movie_id   :bigint           not null
+#  user_id    :bigint           not null
 #
 # Indexes
 #
