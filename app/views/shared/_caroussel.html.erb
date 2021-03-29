@@ -17,10 +17,12 @@
                   <% movies[i..y].each do |movie| %>
                     <div class="movie-card">
                       <div class="img-card-container">
-                        <% if movie["poster_path"] != nil %>
-                          <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}") %>
-                        <% else %>
-                          <%= image_tag("missing_img") %>
+                        <%= link_to findorcreate_path(movie: movie) do %>
+                          <% if movie["poster_path"] != nil %>
+                            <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}") %>
+                          <% else %>
+                            <%= image_tag("missing_img") %>
+                          <% end %>
                         <% end %>
                       </div>
                       <div class="content-card-container">

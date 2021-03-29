@@ -2,13 +2,15 @@
   <% if  @results != nil %>
     <% @results.each do |movie| %>
       <div class="movie-card">
-        <div class="img-card-container">
-          <% if movie["poster_path"] != nil %>
-            <%= image_tag("https://image.tmdb.org/t/p/w500#{movie["poster_path"]}") %>
-          <% else %>
-            <%= image_tag("missing_img") %>
-          <% end %>
-        </div>
+        <%= link_to findorcreate_path(movie: movie) do %>
+          <div class="img-card-container">
+            <% if movie["poster_path"] != nil %>
+              <%= image_tag("https://image.tmdb.org/t/p/w500#{movie["poster_path"]}") %>
+            <% else %>
+              <%= image_tag("missing_img") %>
+            <% end %>
+          </div>
+        <% end %>
         <div class="content-card-container">
           <h6 class="movie-title"><%= movie["title"] %></h6>
           <div class="d-flex">

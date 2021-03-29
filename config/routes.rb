@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   
   post 'addlibrary', to: 'movies#add_to_library'
   post 'removelibrary', to: 'movies#remove_from_library'
-  get 'library', to: 'movies#user_library' 
-  get 'list', to: 'movies#user_list' 
+  get 'library', to: 'movies#user_library'
+  get 'list', to: 'movies#user_list'
+  get 'findorcreate', to: 'movies#find_or_create'
 
 end
