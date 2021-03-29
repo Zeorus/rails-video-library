@@ -10,6 +10,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  username               :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -27,4 +28,11 @@ class User < ApplicationRecord
   has_many :library_items
   has_many :reviews
   has_many :movies, through: :library_items
+  has_one_attached :avatar
+
+  validates :username, 
+            presence: true, 
+            uniqueness: true, 
+            length: { minimum: 3, too_short: "Doit contenir minimum %{count} caractères" },
+            format: { with: /\A[a-zA-Z]+\z/, message: "Doit contenir uniquement des lettres" }
 end

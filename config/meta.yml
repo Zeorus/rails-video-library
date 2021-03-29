@@ -1,0 +1,5 @@
+meta_product_name: "Ma Vidéothèque"
+meta_title: "Ma Vidéothèque - Chercher, noter, trier vos films favoris"
+meta_description: "Ma vidéothèque vous permet de chercher, trier et commenter les films que vous avez vu ou voulez voir en tout simplicité !"
+meta_image: "cover.jpg" # should exist in `app/assets/images/`
+twitter_account: "@product_twitter_account"   # required for Twitter Cards

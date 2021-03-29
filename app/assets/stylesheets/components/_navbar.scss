@@ -1,6 +1,6 @@
 .navbar {
   justify-content: space-between;
-  background: black;
+  background-color: rgba(0, 0, 0, 1);
   padding: 0 60px;
   height: 68px;
   position: sticky;
@@ -59,6 +59,10 @@
     margin: 0 8px;
     color: white;
     opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   .active {

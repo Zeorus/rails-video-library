@@ -37,5 +37,4 @@ document.addEventListener('turbolinks:load', () => {
       $('#review-form').modal();
     });
   }
-
 });
