@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show]
+  skip_before_action :authenticate_user!, only: [:index, :show, :find_or_create]
 
   def index
     return unless params[:query].present?
@@ -16,6 +16,11 @@ class MoviesController < ApplicationController
     if @review == nil
       @review = Review.new
     end
+  end
+
+  def find_or_create
+    @movie = find_or_create_by(params[:movie]["id"])
+    redirect_to movie_path(@movie)
   end
 
   def add_to_library
@@ -39,4 +44,23 @@ class MoviesController < ApplicationController
   end
 
   def user_list; end
+
+  private
+
+  def tmdb_movie(tmdb_movie_id)
+    Tmdb::Movie.detail(tmdb_movie_id)
+  end
+  
+  def find_or_create_by(tmdb_movie_id)
+    movie = tmdb_movie(tmdb_movie_id)
+    Movie.create_with(
+      title: movie['title'],
+      poster_path: movie['poster_path'],
+      sinopsis: movie['overview'],
+      year: movie['release_date'],
+      tagline: movie['tagline'],
+      runtime: movie['runtime'],
+      genres: Genre.where(tmdb_id: movie['genres'].map { |genre| genre['id'] })
+    ).find_or_create_by(tmdb_id: tmdb_movie_id)
+  end
 end
