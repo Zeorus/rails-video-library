@@ -8,26 +8,7 @@ module Movies
     end
 
     def execute
+      movie = FindMovieService.new(tmdb_movie_id).find_movie
       user.movies << movie
     end
-
-    private
-
-    def tmdb_movie
-      Tmdb::Movie.detail(tmdb_movie_id)
-    end
-
-    def movie
-      movie = tmdb_movie
-      Movie.create_with(
-        title: movie['title'],
-        poster_path: movie['poster_path'],
-        sinopsis: movie['overview'],
-        year: movie['release_date'],
-        tagline: movie['tagline'],
-        runtime: movie['runtime'],
-        genres: Genre.where(tmdb_id: movie['genres'].map { |genre| genre['id'] })
-      ).find_or_create_by(tmdb_id: tmdb_movie_id)
-    end
-  end
 end

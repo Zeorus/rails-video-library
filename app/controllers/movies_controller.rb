@@ -12,14 +12,16 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
-    @review = Review.joins(:movie).find_by(user_id: current_user.id, movie: { id: @movie.id })
-    if @review == nil
-      @review = Review.new
+    if user_signed_in?
+      @review = Review.joins(:movie).find_by(user_id: current_user.id, movie: { id: @movie.id })
+      if @review == nil
+        @review = Review.new
+      end
     end
   end
 
   def find_or_create
-    @movie = find_or_create_by(params[:movie]["id"])
+    @movie = FindMovieService.new(params[:movie]["id"]).find_movie
     redirect_to movie_path(@movie)
   end
 
@@ -44,23 +46,4 @@ class MoviesController < ApplicationController
   end
 
   def user_list; end
-
-  private
-
-  def tmdb_movie(tmdb_movie_id)
-    Tmdb::Movie.detail(tmdb_movie_id)
-  end
-  
-  def find_or_create_by(tmdb_movie_id)
-    movie = tmdb_movie(tmdb_movie_id)
-    Movie.create_with(
-      title: movie['title'],
-      poster_path: movie['poster_path'],
-      sinopsis: movie['overview'],
-      year: movie['release_date'],
-      tagline: movie['tagline'],
-      runtime: movie['runtime'],
-      genres: Genre.where(tmdb_id: movie['genres'].map { |genre| genre['id'] })
-    ).find_or_create_by(tmdb_id: tmdb_movie_id)
-  end
 end

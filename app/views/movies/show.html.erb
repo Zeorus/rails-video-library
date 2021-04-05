@@ -28,4 +28,7 @@
   </div>
 </div>
 
-<%= render 'shared/modal_review', movie: @movie, review: @review %>
+<% if user_signed_in? && LibraryItem.find_by(user: current_user, movie: @movie) %>
+  <%= render 'shared/modal_review', movie: @movie, review: @review %>
+<% end %>
+
