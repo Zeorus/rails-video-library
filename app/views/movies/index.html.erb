@@ -19,7 +19,7 @@
             <% end %>
             <div class="movie-user-actions">
               <% if user_signed_in? %>
-                <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
+                <i class="fas fa-plus icon-list" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
                 <% if LibraryItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["id"] }) %>
                   <i class="fas fa-video icon-library i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
                 <% else %>

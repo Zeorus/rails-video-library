@@ -28,6 +28,8 @@ class User < ApplicationRecord
   has_many :library_items
   has_many :reviews
   has_many :movies, through: :library_items
+  has_many :list_items
+  has_many :movies, through: :list_items
   has_one_attached :avatar
 
   validates :username, 
