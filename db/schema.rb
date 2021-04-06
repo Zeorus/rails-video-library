@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_06_075759) do
+ActiveRecord::Schema.define(version: 2021_04_06_112703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,25 +48,6 @@ ActiveRecord::Schema.define(version: 2021_04_06_075759) do
     t.integer "tmdb_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "library_items", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "movie_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["movie_id"], name: "index_library_items_on_movie_id"
-    t.index ["user_id", "movie_id"], name: "index_library_items_on_user_id_and_movie_id", unique: true
-    t.index ["user_id"], name: "index_library_items_on_user_id"
-  end
-
-  create_table "list_items", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "movie_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["movie_id"], name: "index_list_items_on_movie_id"
-    t.index ["user_id"], name: "index_list_items_on_user_id"
   end
 
   create_table "movie_genres", force: :cascade do |t|
@@ -114,14 +95,32 @@ ActiveRecord::Schema.define(version: 2021_04_06_075759) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "views", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_views_on_movie_id"
+    t.index ["user_id"], name: "index_views_on_user_id"
+  end
+
+  create_table "watchlist_items", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_watchlist_items_on_movie_id"
+    t.index ["user_id"], name: "index_watchlist_items_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "library_items", "movies"
-  add_foreign_key "library_items", "users"
-  add_foreign_key "list_items", "movies"
-  add_foreign_key "list_items", "users"
   add_foreign_key "movie_genres", "genres"
   add_foreign_key "movie_genres", "movies"
   add_foreign_key "reviews", "movies"
   add_foreign_key "reviews", "users"
+  add_foreign_key "views", "movies"
+  add_foreign_key "views", "users"
+  add_foreign_key "watchlist_items", "movies"
+  add_foreign_key "watchlist_items", "users"
 end

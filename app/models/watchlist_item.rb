@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: list_items
+# Table name: watchlist_items
 #
 #  id         :bigint           not null, primary key
 #  created_at :datetime         not null
@@ -10,18 +10,17 @@
 #
 # Indexes
 #
-#  index_list_items_on_movie_id  (movie_id)
-#  index_list_items_on_user_id   (user_id)
+#  index_watchlist_items_on_movie_id  (movie_id)
+#  index_watchlist_items_on_user_id   (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (movie_id => movies.id)
 #  fk_rails_...  (user_id => users.id)
 #
-require "test_helper"
+class WatchlistItem < ApplicationRecord
+  belongs_to :user
+  belongs_to :movie
 
-class ListItemTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  validates :movie_id, uniqueness: { scope: :user_id }
 end

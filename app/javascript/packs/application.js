@@ -16,7 +16,8 @@ ActiveStorage.start()
 import "bootstrap";
 
 // Internal imports
-import { updateLibrary } from "../plugins/update_library";
+import { updateSeen } from "../plugins/update_seen";
+import { updateWatchList } from "../plugins/update_watch_list";
 
 document.addEventListener('turbolinks:load', () => {
   
@@ -24,7 +25,8 @@ document.addEventListener('turbolinks:load', () => {
     $('[data-toggle="tooltip"]').tooltip();
   });
 
-  updateLibrary()
+  updateSeen();
+  updateWatchList();
 
   if (document.querySelector('.carousel-item')) {
     document.querySelector('.carousel-container-1').classList.add('active');
