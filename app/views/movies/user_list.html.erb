@@ -18,10 +18,10 @@
             <div class="movie-date"><%= Date.strptime(movie.year, '%Y-%m-%d').strftime('%d/%m/%Y') %></div>
             <div class="movie-user-actions">
               <i class="fas fa-plus icon-list i-active" title="Retirer de Ma Liste" data-toggle="tooltip" data-movieid="<%= movie.tmdb_id %>"></i>
-              <% if View.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["id"] }) %>
-                <i class="fas fa-video icon-library i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+              <% if View.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["tmdb_id"] }) %>
+                <i class="fas fa-video icon-library i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie.tmdb_id %>"></i>
               <% else %>
-                <i class="fas fa-video icon-library" title="J'ai déjà vu ce film" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+                <i class="fas fa-video icon-library" title="J'ai déjà vu ce film" data-toggle="tooltip" data-movieid="<%= movie.tmdb_id %>"></i>
               <% end %>
             </div>
           </div>
@@ -32,6 +32,3 @@
     <p>Votre liste est vide</p>
   <% end %>
 </div>
-
-
-

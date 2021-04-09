@@ -5,6 +5,8 @@ class FindMovieService
 
   def find_movie
     movie = tmdb_movie
+    p "test movie"
+    p movie
     Movie.create_with(
       title: movie['title'],
       poster_path: movie['poster_path'],
