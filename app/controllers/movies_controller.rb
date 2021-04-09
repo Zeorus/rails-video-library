@@ -25,25 +25,41 @@ class MoviesController < ApplicationController
     redirect_to movie_path(@movie)
   end
 
-  def add_to_library
-    outcome = Movies::AddToLibrary.run(
+  def add_to_seen
+    outcome = Movies::AddToSeen.run(
       tmdb_movie_id: params[:movieId].to_i,
       user: current_user
     )
 
-    # TODO: il y a mieux a faire pour la gestion des retours mais je te laisserai reflechir a ca
     head :no_content if outcome.success?
   end
 
-  def remove_from_library
+  def remove_from_seen
     movie = Movie.find_by(tmdb_id: params[:movieId].to_i)
-    LibraryItem.find_by(user_id: current_user.id, movie_id: movie.id).destroy
-    head :no_content
+    View.find_by(user_id: current_user.id, movie_id: movie.id).destroy
+    redirect_back(fallback_location: root_path) 
+  end
+
+  def add_to_watchlist
+    outcome = Movies::AddToWatchList.run(
+      tmdb_movie_id: params[:movieId].to_i,
+      user: current_user
+    )
+
+    head :no_content if outcome.success?
+  end
+
+  def remove_from_watchlist
+    movie = Movie.find_by(tmdb_id: params[:movieId].to_i)
+    WatchlistItem.find_by(user_id: current_user.id, movie_id: movie.id).destroy
+    redirect_back(fallback_location: root_path) 
   end
 
   def user_library
-    @movies = Movie.joins(:library_items).where(library_items: { user_id: current_user.id })
+    @movies = current_user.seen_movies
   end
 
-  def user_list; end
+  def user_list
+    @movies = current_user.towatch_movies
+  end
 end

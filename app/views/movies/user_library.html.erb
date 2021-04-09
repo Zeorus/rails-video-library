@@ -1,6 +1,6 @@
 <h2 class="section-title">Ma Vidéothèque</h2>
 <div id="results-container">
-  <% unless current_user.movies == [] %>
+  <% unless current_user.seen_movies == [] %>
     <% @movies.each do |movie| %>
       <div class="movie-card">
         <%= link_to movie_path(movie) do %>
@@ -17,7 +17,6 @@
           <div class="d-flex">
             <div class="movie-date"><%= Date.strptime(movie.year, '%Y-%m-%d').strftime('%d/%m/%Y') %></div>
             <div class="movie-user-actions">
-              <i class="fas fa-plus" title="Ajouter à Ma Liste" data-toggle="tooltip"></i>
               <i class="fas fa-video icon-library i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie.tmdb_id %>"></i>
             </div>
           </div>

@@ -1,4 +1,4 @@
-const updateLibrary = () => {
+const updateSeen = () => {
   if (document.querySelector('.icon-library')) {
     const addIcons = document.querySelectorAll('.icon-library')
     addIcons.forEach((icon) => {
@@ -9,15 +9,15 @@ const updateLibrary = () => {
         if (target.classList.contains('i-active')) {
           $.ajax({
             type: "POST",
-            url: '/removelibrary',
+            url: '/removeseen',
             data: { movieId: movieTmdbId }
           });
-          target.dataset.originalTitle = "Ajouter à Ma Vidéothèque";
+          target.dataset.originalTitle = "J'ai déjà vu ce film";
           target.classList.remove('i-active');
         } else {
           $.ajax({
             type: "POST",
-            url: '/addlibrary',
+            url: '/addseen',
             data: { movieId: movieTmdbId }
           });
           target.classList.add('i-active');
@@ -28,4 +28,4 @@ const updateLibrary = () => {
   }
 }
 
-export { updateLibrary };
+export { updateSeen };

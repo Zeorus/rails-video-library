@@ -25,9 +25,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :library_items
-  has_many :reviews
-  has_many :movies, through: :library_items
+  has_many :views
+  has_many :seen_movies, through: :views, source: :movie
+
+  has_many :watchlist_items
+  has_many :towatch_movies, through: :watchlist_items, source: :movie
+  
+  has_many :review
   has_one_attached :avatar
 
   validates :username, 
