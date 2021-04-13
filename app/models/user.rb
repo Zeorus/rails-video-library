@@ -20,6 +20,8 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
+  after_create :send_welcome_email
+  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -39,4 +41,10 @@ class User < ApplicationRecord
             uniqueness: true, 
             length: { minimum: 3, too_short: "Doit contenir minimum %{count} caractères" },
             format: { with: /\A[a-zA-Z]+\z/, message: "Doit contenir uniquement des lettres" }
+
+  private
+
+  def send_welcome_email
+    UserMailer.with(user: self).welcome.deliver_now
+  end
 end
