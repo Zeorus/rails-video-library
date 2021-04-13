@@ -1,4 +1,34 @@
 <h2 class="section-title">Mes films à voir</h2>
-
-
-
+<div id="results-container">
+  <% unless current_user.towatch_movies == [] %>
+    <% @movies.each do |movie| %>
+      <div class="movie-card">
+        <%= link_to movie_path(movie) do %>
+          <div class="img-card-container">
+            <% if movie["poster_path"] != nil %>
+              <%= image_tag("https://image.tmdb.org/t/p/w500#{movie.poster_path}") %>
+            <% else %>
+              <%= image_tag("missing_img") %>
+            <% end %>
+          </div>
+        <% end %>
+        <div class="content-card-container">
+          <h6 class="movie-title"><%= movie.title %></h6>
+          <div class="d-flex">
+            <div class="movie-date"><%= Date.strptime(movie.year, '%Y-%m-%d').strftime('%d/%m/%Y') %></div>
+            <div class="movie-user-actions">
+              <i class="fas fa-plus icon-list i-active" title="Retirer de Ma Liste" data-toggle="tooltip" data-movieid="<%= movie.tmdb_id %>"></i>
+              <% if View.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["tmdb_id"] }) %>
+                <i class="fas fa-video icon-library i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie.tmdb_id %>"></i>
+              <% else %>
+                <i class="fas fa-video icon-library" title="J'ai déjà vu ce film" data-toggle="tooltip" data-movieid="<%= movie.tmdb_id %>"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>Votre liste est vide</p>
+  <% end %>
+</div>

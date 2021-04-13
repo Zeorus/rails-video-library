@@ -1,6 +1,6 @@
-class CreateLibraryItems < ActiveRecord::Migration[6.1]
+class CreateViews < ActiveRecord::Migration[6.1]
   def change
-    create_table :library_items do |t|
+    create_table :views do |t|
       t.references :user, null: false, foreign_key: true
       t.references :movie, null: false, foreign_key: true
 

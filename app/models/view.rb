@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: library_items
+# Table name: views
 #
 #  id         :bigint           not null, primary key
 #  created_at :datetime         not null
@@ -10,19 +10,17 @@
 #
 # Indexes
 #
-#  index_library_items_on_movie_id              (movie_id)
-#  index_library_items_on_user_id               (user_id)
-#  index_library_items_on_user_id_and_movie_id  (user_id,movie_id) UNIQUE
+#  index_views_on_movie_id  (movie_id)
+#  index_views_on_user_id   (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (movie_id => movies.id)
 #  fk_rails_...  (user_id => users.id)
 #
-require "test_helper"
+class View < ApplicationRecord
+  belongs_to :user
+  belongs_to :movie
 
-class LibraryItemTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  validates :movie_id, uniqueness: { scope: :user_id }
 end
