@@ -127,6 +127,7 @@ GEM
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
+    json (2.5.1)
     listen (3.4.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -163,6 +164,11 @@ GEM
     parser (3.0.0.0)
       ast (~> 2.4.1)
     pg (1.2.3)
+    postmark (1.21.3)
+      json
+    postmark-rails (0.21.0)
+      actionmailer (>= 3.0.0)
+      postmark (>= 1.21.3, < 2.0)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -347,6 +353,7 @@ DEPENDENCIES
   listen (~> 3.3)
   mutations (~> 0.9.1)
   pg (~> 1.1)
+  postmark-rails
   pry-byebug
   pry-clipboard
   pry-rails

@@ -22,6 +22,7 @@ gem 'themoviedb'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
 gem 'cloudinary', '~> 1.16.0'
+gem 'postmark-rails'
 
 group :development, :test do
   gem 'brakeman' # https://github.com/presidentbeef/brakeman
