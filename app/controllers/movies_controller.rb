@@ -12,6 +12,7 @@ class MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @youtube_videos = YoutubeVideoIdService.new(@movie.title).find_video
     if user_signed_in?
       @review = Review.joins(:movie).find_by(user_id: current_user.id, movie: { id: @movie.id })
       if @review == nil
