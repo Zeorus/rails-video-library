@@ -30,4 +30,5 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  username: Username
+  valid_email: (Please enter a valid email, a confirmation request will be sent)
