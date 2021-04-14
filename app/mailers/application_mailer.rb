@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationMailer < ActionMailer::Base
-  default from: 'sschwob@mavideotheque.fr'
+  default from: 'no-reply@mavideotheque.fr'
   layout 'mailer'
 end
