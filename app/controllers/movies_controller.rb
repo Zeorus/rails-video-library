@@ -38,7 +38,11 @@ class MoviesController < ApplicationController
   def remove_from_seen
     movie = Movie.find_by(tmdb_id: params[:movieId].to_i)
     View.find_by(user_id: current_user.id, movie_id: movie.id).destroy
-    redirect_back(fallback_location: root_path) 
+    if params[:currentPath] == "/" || params[:currentPath] == "/movies"
+      head :no_content
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def add_to_watchlist
@@ -53,7 +57,11 @@ class MoviesController < ApplicationController
   def remove_from_watchlist
     movie = Movie.find_by(tmdb_id: params[:movieId].to_i)
     WatchlistItem.find_by(user_id: current_user.id, movie_id: movie.id).destroy
-    redirect_back(fallback_location: root_path) 
+    if params[:currentPath] == "/" || params[:currentPath] == "/movies"
+      head :no_content
+    else
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def user_library
