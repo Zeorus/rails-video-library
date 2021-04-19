@@ -24,3 +24,16 @@
     font-size: 60px;
   }
 }
+
+.link {
+
+  &:hover {
+    color: white;
+  }
+}
+
+@media(max-width: 560px) {
+  #banner-section {
+    display: none;
+  }
+}
