@@ -5,6 +5,12 @@ Rails.application.routes.draw do
   resources :movies, only: [ :index, :show ] do
     resources :reviews, only: [ :create, :update ]
   end
+
+  get 'mostpopularmovies', to: 'pages#most_popular_movies'
+  get 'best2020movies', to: 'pages#best_2020_movies'
+  get 'bestmovies', to: 'pages#best_movies'
+
+  post 'loadcarrousel', to: 'pages#load_carrousel'
   
   post 'addseen', to: 'movies#add_to_seen'
   post 'removeseen', to: 'movies#remove_from_seen'

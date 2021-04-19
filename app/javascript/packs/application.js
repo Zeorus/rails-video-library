@@ -18,6 +18,7 @@ import "bootstrap";
 // Internal imports
 import { updateSeen } from "../plugins/update_seen";
 import { updateWatchList } from "../plugins/update_watch_list";
+// import { checkScreenSize } from "../plugins/screen_size";
 
 document.addEventListener('turbolinks:load', () => {
   
@@ -27,6 +28,7 @@ document.addEventListener('turbolinks:load', () => {
 
   updateSeen();
   updateWatchList();
+  // checkScreenSize();
 
   if (document.querySelector('.carousel-item')) {
     document.querySelector('.carousel-container-1').classList.add('active');

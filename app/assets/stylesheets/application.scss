@@ -32,3 +32,9 @@ a {
   margin: 20px 60px 24px 60px;
   min-height: calc(100vh - 180px);
 }
+
+@media(max-width: 560px) {
+  #page-container {
+    margin: 0;
+  }
+}
