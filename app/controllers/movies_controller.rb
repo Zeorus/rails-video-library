@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index, :show, :find_or_create]
+  skip_before_action :authenticate_user!, only: [:index, :show, :find_or_create, :find_or_create_js]
 
   def index
     return unless params[:query].present?
@@ -26,6 +26,11 @@ class MoviesController < ApplicationController
     redirect_to movie_path(@movie)
   end
 
+  def find_or_create_js
+    @movie = FindMovieService.new(params[:movieId].to_i).find_movie
+    redirect_to movie_path(@movie)
+  end
+
   def add_to_seen
     outcome = Movies::AddToSeen.run(
       tmdb_movie_id: params[:movieId].to_i,
@@ -38,10 +43,10 @@ class MoviesController < ApplicationController
   def remove_from_seen
     movie = Movie.find_by(tmdb_id: params[:movieId].to_i)
     View.find_by(user_id: current_user.id, movie_id: movie.id).destroy
-    if params[:currentPath] == "/" || params[:currentPath] == "/movies"
-      head :no_content
-    else
+    if refresh_page?(params[:currentPath])
       redirect_back(fallback_location: root_path)
+    else
+      head :no_content
     end
   end
 
@@ -57,10 +62,10 @@ class MoviesController < ApplicationController
   def remove_from_watchlist
     movie = Movie.find_by(tmdb_id: params[:movieId].to_i)
     WatchlistItem.find_by(user_id: current_user.id, movie_id: movie.id).destroy
-    if params[:currentPath] == "/" || params[:currentPath] == "/movies"
-      head :no_content
-    else
+    if refresh_page?(params[:currentPath])
       redirect_back(fallback_location: root_path)
+    else
+      head :no_content
     end
   end
 
@@ -70,5 +75,21 @@ class MoviesController < ApplicationController
 
   def user_list
     @movies = current_user.towatch_movies
+  end
+
+  def user_movies_status
+    user_watchlist = WatchlistItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: params[:movieId] })
+    user_seen = View.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: params[:movieId] })
+    render json: { user_watchlist: user_watchlist, user_seen: user_seen }
+  end
+
+  private 
+
+  def refresh_page?(path)
+    if path == "/" || path == "/movies" || path == "/mostpopularmovies" || path == "/best2020movies" || path == "/bestmovies"
+      return false
+    else
+      return true
+    end
   end
 end

@@ -1,0 +1,37 @@
+<div id="display-movies-container" data-search="<%= @search %>" data-signedin="<%= user_signed_in? %>" data-tmdb="<%= ENV['TMDB_API_KEY'].delete_suffix('491f') %>">
+  <% @movies.each do |movie| %>
+    <div class="movie-card">
+      <%= link_to findorcreate_path(movie: movie) do %>
+        <div class="img-card-container">
+          <% if movie["poster_path"] != nil %>
+            <%= image_tag("https://image.tmdb.org/t/p/w500#{movie["poster_path"]}") %>
+          <% else %>
+            <%= image_tag("missing_img") %>
+          <% end %>
+        </div>
+      <% end %>
+      <div class="content-card-container">
+        <h6 class="movie-title"><%= movie["title"] %></h6>
+        <div class="d-flex">
+          <% if movie["release_date"] != "" %>
+            <div class="movie-date"><%= Date.strptime(movie["release_date"], '%Y-%m-%d').strftime('%d/%m/%Y') %></div>
+          <% end %>
+          <div class="movie-user-actions">
+            <% if user_signed_in? %>
+              <% if WatchlistItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["id"] }) %>
+                <i class="fas fa-plus icon-list i-active" title="Retirer de Ma Liste" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+              <% else %>
+                <i class="fas fa-plus icon-list" title="Ajouter à Ma Liste" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+              <% end %>
+              <% if View.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["id"] }) %>
+                <i class="fas fa-video icon-library i-active" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+              <% else %>
+                <i class="fas fa-video icon-library" title="J'ai déjà vu ce film" data-toggle="tooltip" data-movieid="<%= movie["id"] %>"></i>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -38,3 +38,9 @@ a {
     margin: 0;
   }
 }
+
+.movie-link {
+  &:hover {
+    cursor: pointer;
+  }
+}

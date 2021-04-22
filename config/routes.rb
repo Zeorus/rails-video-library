@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'mostpopularmovies', to: 'pages#most_popular_movies'
   get 'best2020movies', to: 'pages#best_2020_movies'
   get 'bestmovies', to: 'pages#best_movies'
+  get 'moviesbygenre', to: 'pages#movies_by_genre'
 
   post 'loadcarrousel', to: 'pages#load_carrousel'
   
@@ -18,8 +19,12 @@ Rails.application.routes.draw do
   post 'addwatchlist', to: 'movies#add_to_watchlist'
   post 'removewatchlist', to: 'movies#remove_from_watchlist'
 
+  post 'findorcreatejs', to: 'movies#find_or_create_js'
+  post 'usermoviesstatus', to: 'movies#user_movies_status'
+
   get 'library', to: 'movies#user_library'
   get 'list', to: 'movies#user_list'
   get 'findorcreate', to: 'movies#find_or_create'
+  
 
 end
