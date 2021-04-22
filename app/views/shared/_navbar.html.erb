@@ -5,14 +5,42 @@
     <% end %>
 
     <ul class="navbar-menu">
-      <li class="<%= 'active' if current_page?(root_path) %>">
+      <li class="navbar-option <%= 'active' if current_page?(root_path) %>">
         <%= link_to "Accueil", "/" %>
       </li>
-      <li class="<%= 'active' if current_page?(list_path) %>">
+      <li class="navbar-option <%= 'active' if current_page?(list_path) %>">
         <%= link_to "Ma Liste", list_path %>
       </li>
-      <li class="<%= 'active' if current_page?(library_path) %>">
+      <li class="navbar-option <%= 'active' if current_page?(library_path) %>">
         <%= link_to "<i class='fas fa-video'></i> Ma Vidéothèque".html_safe, library_path %>
+      </li>
+      <li>
+        <div class="drop-genres">
+          <div class="navbar-option btn-genres dropdown-toggle" id="genresDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Genres <i class="fas fa-sort-down"></i>
+          </div>
+          <div class="dropdown-menu" aria-labelledby="genresDropdown">
+            <%= link_to "Action", moviesbygenre_path(id: "28"), class: "dropdown-item" %>
+            <%= link_to "Aventure", moviesbygenre_path(id: "12"), class: "dropdown-item" %>
+            <%= link_to "Animation", moviesbygenre_path(id: "16"), class: "dropdown-item" %>
+            <%= link_to "Comédie", moviesbygenre_path(id: "35"), class: "dropdown-item" %>
+            <%= link_to "Crime", moviesbygenre_path(id: "80"), class: "dropdown-item" %>
+            <%= link_to "Documentaire", moviesbygenre_path(id: "99"), class: "dropdown-item" %>
+            <%= link_to "Drame", moviesbygenre_path(id: "18"), class: "dropdown-item" %>
+            <%= link_to "Familial", moviesbygenre_path(id: "10751"), class: "dropdown-item" %>
+            <%= link_to "Fantastique", moviesbygenre_path(id: "14"), class: "dropdown-item" %>
+            <%= link_to "Histoire", moviesbygenre_path(id: "36"), class: "dropdown-item" %>
+            <%= link_to "Horreur", moviesbygenre_path(id: "27"), class: "dropdown-item" %>
+            <%= link_to "Musique", moviesbygenre_path(id: "10402"), class: "dropdown-item" %>
+            <%= link_to "Mystère", moviesbygenre_path(id: "9648"), class: "dropdown-item" %>
+            <%= link_to "Romance", moviesbygenre_path(id: "10749"), class: "dropdown-item" %>
+            <%= link_to "Science-Fiction", moviesbygenre_path(id: "878"), class: "dropdown-item" %>
+            <%= link_to "Téléfilm", moviesbygenre_path(id: "10770"), class: "dropdown-item" %>
+            <%= link_to "Thriller", moviesbygenre_path(id: "53"), class: "dropdown-item" %>
+            <%= link_to "Guerre", moviesbygenre_path(id: "10752"), class: "dropdown-item" %>
+            <%= link_to "Western", moviesbygenre_path(id: "37"), class: "dropdown-item" %>
+          </div>
+        </div>
       </li>
     </ul>
   </div>

@@ -4,34 +4,40 @@ require 'json'
 require 'open-uri'
 
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:home]
+  skip_before_action :authenticate_user!
+  before_action :set_url
 
   def home
     @y = 7
     @load = "true"
     @incr = @y + 1
-    base_url = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV['TMDB_API_KEY']}&language=fr"
-    @most_popular_movies = parse_url("#{base_url}&sort_by=popularity.desc")['results'] + parse_url("#{base_url}&sort_by=popularity.desc&page=2")['results']
-    @best_2020_movies = parse_url("#{base_url}&year=2020&sort_by=popularity.desc")['results'] + parse_url("#{base_url}&year=2020&sort_by=popularity.desc&page=2")['results']
-    @best_movies = parse_url("#{base_url}&vote_count.gte=500&sort_by=vote_average.desc")['results'] + parse_url("#{base_url}&vote_count.gte=500&sort_by=vote_average.desc&page=2")['results']
+    @most_popular_movies = parse_url("#{@base_url}&sort_by=popularity.desc")['results'] + parse_url("#{@base_url}&sort_by=popularity.desc&page=2")['results']
+    @best_2020_movies = parse_url("#{@base_url}&year=2020&sort_by=popularity.desc")['results'] + parse_url("#{@base_url}&year=2020&sort_by=popularity.desc&page=2")['results']
+    @best_movies = parse_url("#{@base_url}&vote_count.gte=500&sort_by=vote_average.desc")['results'] + parse_url("#{@base_url}&vote_count.gte=500&sort_by=vote_average.desc&page=2")['results']
   end
 
   def most_popular_movies
-    base_url = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV['TMDB_API_KEY']}&language=fr"
-    @results = parse_url("#{base_url}&sort_by=popularity.desc")['results'] + parse_url("#{base_url}&sort_by=popularity.desc&page=2")['results']
-    render 'movies/index'
+    @search = "sort_by=popularity.desc"
+    @movies = parse_url("#{@base_url}&#{@search}")['results'] + parse_url("#{@base_url}&#{@search}&page=2")['results']
+    render 'shared/_movies'
   end
 
   def best_2020_movies
-    base_url = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV['TMDB_API_KEY']}&language=fr"
-    @results = parse_url("#{base_url}&year=2020&sort_by=popularity.desc")['results'] + parse_url("#{base_url}&year=2020&sort_by=popularity.desc&page=2")['results']
-    render 'movies/index'
+    @search = "year=2020&sort_by=popularity.desc"
+    @movies = parse_url("#{@base_url}&#{@search}")['results'] + parse_url("#{@base_url}&#{@search}&page=2")['results']
+    render 'shared/_movies'
   end
 
   def best_movies
-    base_url = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV['TMDB_API_KEY']}&language=fr"
-    @results = parse_url("#{base_url}&vote_count.gte=500&sort_by=vote_average.desc")['results'] + parse_url("#{base_url}&vote_count.gte=500&sort_by=vote_average.desc&page=2")['results']
-    render 'movies/index'
+    @search = "vote_count.gte=500&sort_by=vote_average.desc"
+    @movies = parse_url("#{@base_url}&#{@search}")['results'] + parse_url("#{@base_url}&#{@search}&page=2")['results']
+    render 'shared/_movies'
+  end
+
+  def movies_by_genre
+    @search = "with_genres=#{params[:id]}"
+    @movies = parse_url("#{@base_url}&#{@search}&sort_by=popularity.desc")['results'] + parse_url("#{@base_url}&#{@search}&sort_by=popularity.desc&page=2")['results']
+    render 'shared/_movies'
   end
 
   # def home
@@ -41,10 +47,9 @@ class PagesController < ApplicationController
   #   else
   #     @load = "true"
   #     @incr = @y + 1
-  #     base_url = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV['TMDB_API_KEY']}&language=fr"
-  #     @most_popular_movies = parse_url("#{base_url}&sort_by=popularity.desc")['results'] + parse_url("#{base_url}&sort_by=popularity.desc&page=2")['results']
-  #     @best_2020_movies = parse_url("#{base_url}&year=2020&sort_by=popularity.desc")['results'] + parse_url("#{base_url}&year=2020&sort_by=popularity.desc&page=2")['results']
-  #     @best_movies = parse_url("#{base_url}&vote_count.gte=500&sort_by=vote_average.desc")['results'] + parse_url("#{base_url}&vote_count.gte=500&sort_by=vote_average.desc&page=2")['results']
+  #     @most_popular_movies = parse_url("#{@base_url}&sort_by=popularity.desc")['results'] + parse_url("#{@base_url}&sort_by=popularity.desc&page=2")['results']
+  #     @best_2020_movies = parse_url("#{@base_url}&year=2020&sort_by=popularity.desc")['results'] + parse_url("#{@base_url}&year=2020&sort_by=popularity.desc&page=2")['results']
+  #     @best_movies = parse_url("#{@base_url}&vote_count.gte=500&sort_by=vote_average.desc")['results'] + parse_url("#{@base_url}&vote_count.gte=500&sort_by=vote_average.desc&page=2")['results']
   #   end
   # end
 
@@ -53,6 +58,10 @@ class PagesController < ApplicationController
   # end
 
   private
+
+  def set_url
+    @base_url = "https://api.themoviedb.org/3/discover/movie?api_key=#{ENV['TMDB_API_KEY']}&language=fr"
+  end
 
   def parse_url(url)
     response = open(url).read

@@ -19,9 +19,10 @@ import "bootstrap";
 import { updateSeen } from "../plugins/update_seen";
 import { updateWatchList } from "../plugins/update_watch_list";
 // import { checkScreenSize } from "../plugins/screen_size";
+import { infiniteScroll } from "../plugins/load_movies";
 
 document.addEventListener('turbolinks:load', () => {
-  
+
   $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
   });
@@ -29,6 +30,9 @@ document.addEventListener('turbolinks:load', () => {
   updateSeen();
   updateWatchList();
   // checkScreenSize();
+  if (document.getElementById('display-movies-container')) {
+    infiniteScroll();
+  }
 
   if (document.querySelector('.carousel-item')) {
     document.querySelector('.carousel-container-1').classList.add('active');
