@@ -25,12 +25,15 @@
   }
 }
 
-.link {
+.carousel-title {
+  color: white;
+  opacity: 0.5;
 
   &:hover {
-    color: white;
+    opacity: 1;
   }
 }
+
 
 @media(max-width: 560px) {
   #banner-section {

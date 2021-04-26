@@ -1,6 +1,7 @@
 @import "show";
 
-#results-container, #display-movies-container {
+#results-container, #display-movies-container, .results-container {
+  margin-bottom: 24px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-row-gap: 24px;
@@ -8,4 +9,40 @@
 
 .section-title {
   padding-left: 14px;
+}
+
+@media(max-width: 1350px) {
+  #results-container, #display-movies-container, .results-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media(max-width: 1200px) {
+  #results-container, #display-movies-container, .results-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media(max-width: 1050px) {
+  #results-container, #display-movies-container, .results-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media(max-width: 915px) {
+  #results-container, #display-movies-container, .results-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+@media(max-width: 750px) {
+  #results-container, #display-movies-container, .results-container {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media(max-width: 590px) {
+  #results-container, #display-movies-container, .results-container {
+    grid-template-columns: 1fr 1fr;
+  }
 }

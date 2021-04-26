@@ -1,0 +1,21 @@
+.list-header {
+  display: flex;
+  align-items: center;
+
+  .fa-edit {
+    color: white !important;
+    opacity: 0.5;
+    margin-left: 8px;
+    font-size: 16px;
+    margin-bottom: 8px;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 1;
+    }
+  }
+}
+
+.container-info {
+  padding-left: 14px;
+}

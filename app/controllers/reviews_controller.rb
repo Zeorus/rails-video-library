@@ -21,6 +21,8 @@ class ReviewsController < ApplicationController
       redirect_to movie_path(@movie), notice: "Erreur, votre avis n'a pas été sauvegardé"
     end
   end
+  
+  private
 
   def review_params
     params.require(:review).permit(:rate, :content)

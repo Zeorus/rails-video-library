@@ -43,5 +43,8 @@
 
     <%= render 'shared/footer' %>
     
+    <% if @list != nil %>
+      <%= render 'shared/modal_list', list: @list %>
+    <% end %>
   </body>
 </html>

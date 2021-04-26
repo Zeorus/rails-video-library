@@ -15,18 +15,22 @@
 
 .content-card-container {
   padding-top: 8px;
-  overflow: hidden;
 
   .movie-title {
     font-weight: bold;
   }
   
   .movie-date {
-    font-size: 10px;
+    font-size: 12px;
     flex-grow: 1;
     opacity: 0.5;
     margin: 0;
   }
+}
+
+.infos-card-container {
+  display: flex;
+  align-items: center;
 }
 
 .movie-user-actions {
@@ -34,11 +38,7 @@
   justify-content: flex-end;
 
   .fa-plus {
-    margin-right: 8px;
-  }
-
-  i {
-    font-size: 14px;
+    font-size: 18px;
     opacity: 0.5;
     
     &:hover {
@@ -46,4 +46,29 @@
       opacity: 1;
     }
   }
+
+  .fa-plus::after {
+    display: none;
+  }
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-menu-list {
+  position: relative;
+  left: -60px !important;
+}
+
+.dropdown-item-list {
+  font-size: 14px;
+  padding: 0 8px;
+}
+
+.header-list {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 0 8px;
 }

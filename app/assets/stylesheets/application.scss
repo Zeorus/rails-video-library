@@ -12,6 +12,7 @@
 @import "components/index";
 @import "pages/index";
 @import "movies/index";
+@import "lists/index";
 
 body {
   background-color: #141414;
@@ -20,11 +21,21 @@ body {
 
 a {
   text-decoration: none !important;
-  color: inherit;
+  color: white;
   background-color: transparent;
 
   &:hover {
-    color:inherit;
+    color: inherit;
+    opacity: 1;
+  }
+}
+
+.link {
+
+  &:hover {
+    cursor: pointer !important;
+    color: inherit !important;
+    opacity: 1 !important;
   }
 }
 
@@ -36,11 +47,5 @@ a {
 @media(max-width: 560px) {
   #page-container {
     margin: 0;
-  }
-}
-
-.movie-link {
-  &:hover {
-    cursor: pointer;
   }
 }

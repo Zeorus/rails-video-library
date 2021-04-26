@@ -32,6 +32,10 @@
   height: 310px;
 }
 
+.carousel-inner {
+  overflow: visible !important;
+}
+
 @media(max-width: 1500px) {
   .caroussel-row {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;

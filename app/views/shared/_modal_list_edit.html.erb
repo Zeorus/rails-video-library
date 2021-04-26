@@ -1,0 +1,18 @@
+<div class="modal fade" id="listEdit" tabindex="-1" aria-labelledby="editList" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editList">Renommer la liste</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <div aria-hidden="true" class="btn-modal-close">&times;</div>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for(@list_edit) do |f| %>
+          <%= f.input :name, label: "Nom"%>
+          <%= f.submit class: 'btn btn-list' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

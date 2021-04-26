@@ -8,15 +8,12 @@
       <li class="navbar-option <%= 'active' if current_page?(root_path) %>">
         <%= link_to "Accueil", "/" %>
       </li>
-      <li class="navbar-option <%= 'active' if current_page?(list_path) %>">
-        <%= link_to "Ma Liste", list_path %>
-      </li>
-      <li class="navbar-option <%= 'active' if current_page?(library_path) %>">
-        <%= link_to "<i class='fas fa-video'></i> Ma Vidéothèque".html_safe, library_path %>
-      </li>
+        <li class="navbar-option <%= 'active' if current_page?(lists_path) %>">
+          <%= link_to "<i class='fas fa-video'></i> Ma Vidéothèque".html_safe, lists_path %>
+        </li>
       <li>
         <div class="drop-genres">
-          <div class="navbar-option btn-genres dropdown-toggle" id="genresDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="navbar-option btn-genres dropdown-toggle <%= 'active' if current_page?(moviesbygenre_path) %>" id="genresDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Genres <i class="fas fa-sort-down"></i>
           </div>
           <div class="dropdown-menu" aria-labelledby="genresDropdown">
@@ -44,10 +41,6 @@
       </li>
     </ul>
   </div>
-
-  <%# <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button> %>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
@@ -80,7 +73,7 @@
         </li>
       <% else %>
         <li class="nav-item">
-          <%= link_to "Connexion", new_user_session_path, class: "nav-link" %>
+          <%= link_to "Connexion", new_user_session_path, class: "navbar-option" %>
         </li>
       <% end %>
     </ul>
