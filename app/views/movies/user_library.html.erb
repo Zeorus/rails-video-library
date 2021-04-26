@@ -1,6 +1,6 @@
 <h2 class="section-title">Ma Vidéothèque</h2>
 <div id="results-container">
-  <% unless current_user.seen_movies == [] %>
+  <% unless current_user.movies == [] %>
     <% @movies.each do |movie| %>
       <div class="movie-card">
         <%= link_to movie_path(movie) do %>

@@ -32,13 +32,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  has_many :views, dependent: :destroy
-  has_many :seen_movies, through: :views, source: :movie
-
   has_many :watchlist_items, dependent: :destroy
-  has_many :towatch_movies, through: :watchlist_items, source: :movie
+  has_many :movies, through: :watchlist_items
+  has_many :lists, dependent: :destroy
   
-  has_many :review, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
 
   validates :username,

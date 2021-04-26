@@ -18,7 +18,7 @@
 class Movie < ApplicationRecord
   has_many :movie_genres, dependent: :destroy
   has_many :genres, through: :movie_genres
-  has_many :library_items, dependent: :destroy
+  has_many :views, dependent: :destroy
   has_many :reviews, dependent: :destroy
-  has_many :list_items, dependent: :destroy
+  has_many :watchlist_items, dependent: :destroy
 end

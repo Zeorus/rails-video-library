@@ -7,13 +7,13 @@
 
 <div id="page-container" data-load="<%= @load %>"> 
   <% if @y != 0 %>
-    <h2 class="link"><%= link_to 'Les plus populaires', mostpopularmovies_path %></h2>
+    <h2 class="carousel-title"><%= link_to 'Les plus populaires', mostpopularmovies_path, class: "link" %></h2>
     <%= render '/shared/caroussel', movies: @most_popular_movies, caroussel_id: "1", i: 0, y: @y, incr: @incr %>
     <br>
-    <h2 class="link"><%= link_to 'Meilleurs films de 2020', best2020movies_path %></h2>
+    <h2 class="carousel-title"><%= link_to 'Meilleurs films de 2020', best2020movies_path, class: "link" %></h2>
     <%= render '/shared/caroussel', movies: @best_2020_movies, caroussel_id: "2", i: 0, y: @y, incr: @incr %>
     <br>
-    <h2 class="link"><%= link_to 'Les mieux notés', bestmovies_path %></h2>
+    <h2 class="carousel-title"><%= link_to 'Les mieux notés', bestmovies_path, class: "link" %></h2>
     <%= render '/shared/caroussel', movies: @best_movies, caroussel_id: "3", i: 0, y: @y, incr: @incr %>
   <% end %>
 </div>

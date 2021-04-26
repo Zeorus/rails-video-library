@@ -16,8 +16,7 @@ ActiveStorage.start()
 import "bootstrap";
 
 // Internal imports
-import { updateSeen } from "../plugins/update_seen";
-import { updateWatchList } from "../plugins/update_watch_list";
+import { updateList } from "../plugins/update_list";
 // import { checkScreenSize } from "../plugins/screen_size";
 import { infiniteScroll } from "../plugins/load_movies";
 
@@ -27,8 +26,7 @@ document.addEventListener('turbolinks:load', () => {
     $('[data-toggle="tooltip"]').tooltip();
   });
 
-  updateSeen();
-  updateWatchList();
+  updateList();
   // checkScreenSize();
   if (document.getElementById('display-movies-container')) {
     infiniteScroll();

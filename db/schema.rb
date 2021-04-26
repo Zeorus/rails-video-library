@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_14_092315) do
+ActiveRecord::Schema.define(version: 2021_04_23_082510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,14 @@ ActiveRecord::Schema.define(version: 2021_04_14_092315) do
     t.integer "tmdb_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "lists", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
   create_table "movie_genres", force: :cascade do |t|
@@ -114,18 +122,22 @@ ActiveRecord::Schema.define(version: 2021_04_14_092315) do
     t.bigint "movie_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "list_id", null: false
+    t.index ["list_id"], name: "index_watchlist_items_on_list_id"
     t.index ["movie_id"], name: "index_watchlist_items_on_movie_id"
     t.index ["user_id"], name: "index_watchlist_items_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "lists", "users"
   add_foreign_key "movie_genres", "genres"
   add_foreign_key "movie_genres", "movies"
   add_foreign_key "reviews", "movies"
   add_foreign_key "reviews", "users"
   add_foreign_key "views", "movies"
   add_foreign_key "views", "users"
+  add_foreign_key "watchlist_items", "lists"
   add_foreign_key "watchlist_items", "movies"
   add_foreign_key "watchlist_items", "users"
 end

@@ -1,5 +1,4 @@
-import { toggleSeen } from "./update_seen";
-import { toggleWatchList } from "./update_watch_list";
+import { addToList, changeList } from "./update_list";
 import axios from "axios";
 
 const convertDate = (inputDate) => {
@@ -19,8 +18,7 @@ const convertDate = (inputDate) => {
 
 const addMovieLinks = (movieId) => {
   const movie = document.getElementById(`movie-${movieId}`);
-  const listIcon = document.getElementById(`list-${movieId}`);
-  const libraryIcon = document.getElementById(`library-${movieId}`);
+  const iconList = document.getElementById(`listDropdown-${movieId}`);
 
   movie.addEventListener('click', (event) => {
     const movieTmdbId = event.currentTarget.dataset.movieid;
@@ -31,50 +29,97 @@ const addMovieLinks = (movieId) => {
     });
   });
 
-  if (listIcon != null) {
-    listIcon.addEventListener('click', (event) => {
-      const movieTmdbId = event.currentTarget.dataset.movieid;
-      const currentPath = window.location.pathname;
-      toggleWatchList(event.currentTarget, movieTmdbId, currentPath);
-    });
-  }
+  if (iconList != null) {
+    const listNames = document.querySelectorAll(`.dropdown-item-list-${movieId}`);
+    const currentPath = window.location.pathname;
 
-  if (libraryIcon != null) {
-    libraryIcon.addEventListener('click', (event) => {
-      const movieTmdbId = event.currentTarget.dataset.movieid;
-      const currentPath = window.location.pathname;
-      toggleSeen(event.currentTarget, movieTmdbId, currentPath);
+    listNames.forEach((list) => {
+      list.addEventListener('click', (event) => {
+        const target = event.currentTarget;
+        const movieTmdbId = target.dataset.movieid;
+        const listId = target.dataset.listId;
+        const listItemId = target.dataset.listItemId;
+        const iconList = document.querySelector(`[data-icon-movie-id='${movieTmdbId}']`);
+
+        if (iconList.classList.contains('i-active')) {
+          changeList(movieTmdbId, listId, listItemId, currentPath);
+        } else {
+          addToList(iconList, movieTmdbId, listId, currentPath);
+        }
+      });
     });
   }
 }
 
-const movieStatusRequest = async (movieId) => {
+const watchlistItemRequest = async (movieId) => {
   const token = document.querySelector('[name=csrf-token]').content;
   axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
-  const response = await axios.post('/usermoviesstatus', {movieId: movieId})
+  const response = await axios.post('/watchlistitem', {movieId: movieId})
   return response.data;
 }
 
-const displayUserListIcon = async (movie, signedIn) => {
-  if (signedIn == "true") {
-    const results = await movieStatusRequest(movie.id);
-    if (results.user_watchlist) {
-      return `<i class="fas fa-plus icon-list i-active" id="list-${movie.id}" title="Retirer de Ma Liste" data-toggle="tooltip" data-movieid="${movie.id}"></i>`;
-    } else {
-      return `<i class="fas fa-plus icon-list" id="list-${movie.id}" title="Ajouter à Ma Liste" data-toggle="tooltip" data-movieid="${movie.id}"></i>`;
-    }
-  } else {
-    return "";
-  }
+const listsRequest = async () => {
+  const token = document.querySelector('[name=csrf-token]').content;
+  axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+  const response = await axios.post('/userlists')
+  return response.data;
 }
 
-const displayUserLibraryIcon = async (movie, signedIn) => {
+const displayUserLists = (userLists, movieId) => {
+  let lists = ``;
+  userLists.user_lists.forEach((list) => {
+    lists += `<span class="dropdown-item link dropdown-item-list dropdown-item-list-${movieId}" data-list-id="${list.id}" data-movieid="${movieId}">
+                ${list.name}
+              </span>`;
+  });
+  return lists
+}
+
+const displayUsericonList = async (movie, signedIn) => {
   if (signedIn == "true") {
-    const results = await movieStatusRequest(movie.id);
-    if (results.user_seen) {
-      return `<i class="fas fa-video icon-library i-active" id="library-${movie.id}" title="Retirer de Ma Vidéothèque" data-toggle="tooltip" data-movieid="${movie.id}"></i>`;
+    const resultsItems = await watchlistItemRequest(movie.id);
+    const resultsLists = await listsRequest();
+
+    const lists = (resultsLists) => {
+      if (resultsLists.user_lists) {
+        return displayUserLists(resultsLists, movie.id);
+      } else {
+        return "";
+      }
+    }
+
+    const listNameRequest = async (listId) => {
+      const token = document.querySelector('[name=csrf-token]').content;
+      axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+      const response = await axios.post('/listname', {listId: listId})
+      return response.data;
+    }
+
+    if (resultsItems.watchlist_item != null) {
+      const listName = await listNameRequest(resultsItems.watchlist_item.list_id);
+      return `<i class="fas fa-plus icon-list dropdown-toggle i-active" id="listDropdown-${movie.id}" data-icon-movie-id="${movie.id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+              <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-${movie.id}">
+                <div class="header-list">Actuelle : ${listName.list_name}</div>
+                <hr class="dropdown-divider">
+                <span class="header-list">Changer de liste :</span>
+                ${lists(resultsLists)}
+                <hr class="dropdown-divider">
+                <span class="dropdown-item link dropdown-item-list" data-toggle="modal" data-target="#list">
+                  Créer une nouvelle liste
+                </span>
+                <hr class="dropdown-divider">
+                <a class="dropdown-item link dropdown-item-list" rel="nofollow" data-method="delete" href="/watchlist_items/${resultsItems.watchlist_item.id}?refresh=false">Retirer de la liste</a>
+              </div>`;
     } else {
-      return `<i class="fas fa-video icon-library" id="library-${movie.id}" title="J'ai déjà vu ce film" data-toggle="tooltip" data-movieid="${movie.id}"></i>`;
+      return `<i class="fas fa-plus icon-list dropdown-toggle" data-movieid="${movie.id}" id="listDropdown-${movie.id}" data-icon-movie-id="${movie.id}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+              <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-${movie.id}">
+                <span class="header-list">Ajouter à une liste :</span>  
+                ${lists(resultsLists)}
+                <hr class="dropdown-divider">
+                <span class="dropdown-item link dropdown-item-list" data-toggle="modal" data-target="#list">
+                  Créer une nouvelle liste
+                </span>
+              </div>`;
     }
   } else {
     return "";
@@ -84,8 +129,7 @@ const displayUserLibraryIcon = async (movie, signedIn) => {
 const displayMovieCard = async (movie) => {
   const moviesContainer = document.getElementById('display-movies-container');
   const signedIn = moviesContainer.dataset.signedin;
-  const listIcon = await displayUserListIcon(movie, signedIn);
-  const libraryIcon = await displayUserLibraryIcon(movie, signedIn);
+  const iconList = await displayUsericonList(movie, signedIn);
   const movieCard  = `<div class="movie-card">
                         <div class="img-card-container movie-link" id="movie-${movie.id}" data-movieid="${movie.id}">
                           <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}">
@@ -95,8 +139,9 @@ const displayMovieCard = async (movie) => {
                           <div class="d-flex">
                             <div class="movie-date">${convertDate(movie.release_date)}</div>
                             <div class="movie-user-actions">
-                              ${listIcon}
-                              ${libraryIcon}
+                              <div class="dropdown dropup">
+                                ${iconList}
+                              </div>
                             </div>
                           </div>
                         </div>

@@ -23,7 +23,7 @@
     <p id="show-movie-tagline"><%= @movie.tagline %></p>
     <h2 class="show-movie-subtitle">Sinopsis</h2>
     <p id="show-movie-sinopsis"><%= @movie.sinopsis %></p>
-    <% if user_signed_in? && View.find_by(user: current_user, movie: @movie) %>
+    <% if user_signed_in? && WatchlistItem.find_by(user: current_user, movie: @movie) %>
       <h2 class="show-movie-subtitle">Mon avis <i class="fas fa-edit" title="Écrire un avis" data-toggle="tooltip" id="btn-write-review"></i></h2>
       <% if @review.id != nil %>
         <%= render 'shared/rate', review: @review %>
@@ -35,6 +35,6 @@
   </div>
 </div>
 
-<% if user_signed_in? && View.find_by(user: current_user, movie: @movie) %>
+<% if user_signed_in? && WatchlistItem.find_by(user: current_user, movie: @movie) %>
   <%= render 'shared/modal_review', movie: @movie, review: @review %>
 <% end %>
