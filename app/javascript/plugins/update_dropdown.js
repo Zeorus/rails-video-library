@@ -54,7 +54,7 @@ const buildUserLists = async (userLists, movieId) => {
   
   let listMenu = ``;
   if (userLists.user_lists != [] && resultsItems.watchlist_item == null) listMenu += `<span class="header-list">Ajouter à une liste :</span>`;
-  if (userLists.user_lists.length == 1) listMenu += `<hr class="dropdown-divider">
+  if (userLists.user_lists.length > 1 && resultsItems.watchlist_item != null) listMenu += `<hr class="dropdown-divider">
                                                      <span class="header-list">Changer de liste :</span>`;
 
   userLists.user_lists.forEach((list) => {
@@ -101,8 +101,6 @@ const buildMovieDropdown = async (movieId, signedIn) => {
       return `<i class="fas fa-plus icon-list dropdown-toggle i-active" id="listDropdown-${movieId}" data-icon-movie-id="${movieId}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
               <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-${movieId}">
                 <div class="header-list">Actuelle : ${listName.list_name}</div>
-                <hr class="dropdown-divider">
-                <span class="header-list">Changer de liste :</span>
                 ${lists}
                 <hr class="dropdown-divider">
                 <span class="dropdown-item link dropdown-item-list" data-toggle="modal" data-target="#list">
