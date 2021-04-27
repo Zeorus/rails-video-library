@@ -17,7 +17,7 @@ const addDropdownLinks = (movieId) => {
       if (iconList.classList.contains('i-active')) {
         changeList(movieTmdbId, listId, listItemId, currentPath);
       } else {
-        addToList(iconList, movieTmdbId, listId, currentPath);
+        addToList(movieTmdbId, listId, currentPath);
       }
 
     });
@@ -51,7 +51,12 @@ const buildUserLists = async (userLists, movieId) => {
   const resultsItems = await watchlistItemRequest(movieId);
   let watchlistItemId = "";
   if (resultsItems.watchlist_item != null) watchlistItemId = `data-list-item-id="${resultsItems.watchlist_item.id}"`;
+  
   let listMenu = ``;
+  if (userLists.user_lists != [] && resultsItems.watchlist_item == null) listMenu += `<span class="header-list">Ajouter à une liste :</span>`;
+  if (userLists.user_lists.length == 1) listMenu += `<hr class="dropdown-divider">
+                                                     <span class="header-list">Changer de liste :</span>`;
+
   userLists.user_lists.forEach((list) => {
     if (resultsItems.watchlist_item != null) {
       if (list.id != resultsItems.watchlist_item.list_id) {
@@ -65,6 +70,7 @@ const buildUserLists = async (userLists, movieId) => {
                   </span>`;
     }
   });
+  if (userLists.user_lists != [] && resultsItems.watchlist_item == null) listMenu += `<hr class="dropdown-divider">`;
   return listMenu
 }
 
@@ -108,9 +114,7 @@ const buildMovieDropdown = async (movieId, signedIn) => {
     } else {
       return `<i class="fas fa-plus icon-list dropdown-toggle" data-movieid="${movieId}" id="listDropdown-${movieId}" data-icon-movie-id="${movieId}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
               <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-${movieId}">
-                <span class="header-list">Ajouter à une liste :</span>  
                 ${lists}
-                <hr class="dropdown-divider">
                 <span class="dropdown-item link dropdown-item-list" data-toggle="modal" data-target="#list">
                   Créer une nouvelle liste
                 </span>
@@ -121,9 +125,10 @@ const buildMovieDropdown = async (movieId, signedIn) => {
   }
 }
 
-const updateDropdown = async (movieId, signedIn, verb) => {
+const updateDropdown = async (movieId, signedIn, verb, currentPath) => {
   const movieDropdown = await buildMovieDropdown(movieId, signedIn);
   const iconList = document.getElementById(`movie-dropdown-${movieId}`);
+  
   if (iconList != null) {
     iconList.innerHTML = "";
     iconList.insertAdjacentHTML("afterbegin", movieDropdown);
@@ -134,6 +139,7 @@ const updateDropdown = async (movieId, signedIn, verb) => {
     }
   }
 
+  if (currentPath.startsWith('/movies/')) iconList.classList.add('icon-list-show');
   addDropdownLinks(movieId);
 }
 
