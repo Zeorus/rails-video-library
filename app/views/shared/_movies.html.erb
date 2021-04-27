@@ -18,7 +18,7 @@
           <% end %>
           <div class="movie-user-actions">
             <% if user_signed_in? %>
-              <div class="dropdown dropup">
+              <div class="dropdown dropup" id="movie-dropdown-<%= movie["id"] %>">
                 <% if list_item = WatchlistItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["id"] }) %>
                   <i class="fas fa-plus icon-list dropdown-toggle i-active" id="listDropdown-<%= movie["id"] %>" data-icon-movie-id="<%= movie["id"] %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                   <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-<%= movie["id"] %>">
@@ -28,7 +28,7 @@
                     <% current_user.lists.each do |list| %>
                       <% if list_item.list != list %>
                         <span class="dropdown-item link dropdown-item-list" data-list-id="<%= list.id %>" data-movieid="<%= movie["id"] %>" data-list-item-id="<%= list_item.id %>">
-                          <%= list.name %> (<%= list.watchlist_items.count %> film<%= 's' if list.watchlist_items.count > 1 %>)
+                          <%= list.name %>
                         </span>
                       <% end %>
                     <% end %>
@@ -37,7 +37,7 @@
                       Créer une nouvelle liste
                     </span>
                     <hr class="dropdown-divider">
-                    <%= link_to "Retirer de la liste", watchlist_item_path(list_item.id, { refresh: false } ), method: :delete, class: "dropdown-item link dropdown-item-list" %>
+                    <span class="dropdown-item link remove-list-link" data-watchlist-item-id="<%= list_item.id %>" id="remove-link-<%= movie["id"] %>" data-movieid="<%= movie["id"] %>">Retirer de la liste</span>
                   </div>
                 <% else %>
                   <i class="fas fa-plus icon-list dropdown-toggle" data-movieid="<%= movie["id"] %>" id="listDropdown-<%= movie["id"] %>" data-icon-movie-id="<%= movie["id"] %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
@@ -46,7 +46,7 @@
                       <span class="header-list">Ajouter à une liste :</span>
                       <% current_user.lists.each do |list| %>
                         <span class="dropdown-item link dropdown-item-list" data-list-id="<%= list.id %>" data-movieid="<%= movie["id"] %>">
-                          <%= list.name %> (<%= list.watchlist_items.count %> film<%= 's' if list.watchlist_items.count > 1 %>)
+                          <%= list.name %>
                         </span>
                       <% end %>
                       <hr class="dropdown-divider">

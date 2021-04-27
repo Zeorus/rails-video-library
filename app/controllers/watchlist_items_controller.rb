@@ -4,14 +4,13 @@ class WatchlistItemsController < ApplicationController
     watchlist_item = WatchlistItem.find(params[:id])
     list = List.find(params[:listId])
     watchlist_item.update(list: list)
-    redirect_back(fallback_location: root_path, notice: "\"#{watchlist_item.movie.title}\" a été changé de liste.")
+    head :ok
   end
 
   def destroy
     list_item = WatchlistItem.find(params[:id])
-    movie_title = list_item.movie.title
     list_item.destroy
-    redirect_back(fallback_location: root_path, notice: "\"#{movie_title}\" a été retiré de vos listes.")
+    head :ok
   end
 
   def watchlist_item?

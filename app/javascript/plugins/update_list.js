@@ -1,23 +1,36 @@
-const addToList = (iconList, movieTmdbId, listId, currentPath) => {
-  $.ajax({
-    type: "POST",
-    url: '/addtolist',
-    data: { movieId: movieTmdbId, listId: listId, currentPath: currentPath }
-  });
-  iconList.classList.add('i-active');
+import { updateDropdown } from "./update_dropdown";
+import axios from "axios";
+
+const addToList = async (iconList, movieTmdbId, listId, currentPath) => {
+  const signedIn = "true";
+  const token = document.querySelector('[name=csrf-token]').content;
+  axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+  await axios.post('/addtolist', {movieId: movieTmdbId, listId: listId, currentPath: currentPath})
+  updateDropdown(movieTmdbId, signedIn, "add");
 }
 
-const changeList = (movieTmdbId, listId, listItemId, currentPath) => {
-  $.ajax({
-    type: "PATCH",
-    url: `/watchlist_items/${parseInt(listItemId, 10)}`,
-    data: { movieId: movieTmdbId, listId: listId, currentPath: currentPath }
-  });
+const changeList = async (movieTmdbId, listId, listItemId, currentPath) => {
+  const signedIn = "true";
+  const token = document.querySelector('[name=csrf-token]').content;
+  axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+  await axios.patch(`/watchlist_items/${parseInt(listItemId, 10)}`, {movieId: movieTmdbId, listId: listId, currentPath: currentPath})
+  updateDropdown(movieTmdbId, signedIn, "change");
+  if (currentPath == '/lists') document.location.reload();
+}
+
+const removeFromList = async (movieTmdbId, watchlistItemId, currentPath) => {
+  const signedIn = "true";
+  const token = document.querySelector('[name=csrf-token]').content;
+  axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
+  await axios.delete(`/watchlist_items/${parseInt(watchlistItemId, 10)}`, {currentPath: currentPath})
+  updateDropdown(movieTmdbId, signedIn, "delete");
+  if (currentPath == '/lists') document.location.reload();
 }
 
 const updateList = () => {
   if (document.querySelector('.icon-list')) {
     const listNames = document.querySelectorAll('.dropdown-item-list');
+    const removeLinks = document.querySelectorAll('.remove-list-link');
     const currentPath = window.location.pathname;
 
     listNames.forEach((list) => {
@@ -35,7 +48,16 @@ const updateList = () => {
         }
       });
     });
+
+    removeLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const target = event.currentTarget;
+        const watchlistItemId = target.dataset.watchlistItemId;
+        const movieTmdbId = target.dataset.movieid;
+        removeFromList(movieTmdbId, watchlistItemId, currentPath);
+      });
+    });
   }
 }
 
-export { updateList, addToList, changeList };
+export { updateList, addToList, changeList, removeFromList };
