@@ -25,6 +25,11 @@
   }
 }
 
+#show-movie-header {
+  display: flex;
+  align-items: center;
+}
+
 #show-movie-title {
   font-weight: bold;
   margin: 0;
@@ -40,7 +45,7 @@
   margin-bottom: 16px;
   font-size: 14px;
 
-  i {
+  .fa-circle {
     margin: 0 8px;
     font-size: 4px;
   }
@@ -50,4 +55,9 @@
   font-style: italic;
   opacity: 0.5;
   font-size: 18px;
+}
+
+.icon-list-show {
+  margin-left: 48px;
+  font-size: 30px;
 }

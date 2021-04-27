@@ -1,12 +1,13 @@
 import { updateDropdown } from "./update_dropdown";
 import axios from "axios";
 
-const addToList = async (iconList, movieTmdbId, listId, currentPath) => {
+const addToList = async (movieTmdbId, listId, currentPath) => {
   const signedIn = "true";
   const token = document.querySelector('[name=csrf-token]').content;
   axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
   await axios.post('/addtolist', {movieId: movieTmdbId, listId: listId, currentPath: currentPath})
-  updateDropdown(movieTmdbId, signedIn, "add");
+  updateDropdown(movieTmdbId, signedIn, "add", currentPath);
+  
 }
 
 const changeList = async (movieTmdbId, listId, listItemId, currentPath) => {
@@ -14,7 +15,7 @@ const changeList = async (movieTmdbId, listId, listItemId, currentPath) => {
   const token = document.querySelector('[name=csrf-token]').content;
   axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
   await axios.patch(`/watchlist_items/${parseInt(listItemId, 10)}`, {movieId: movieTmdbId, listId: listId, currentPath: currentPath})
-  updateDropdown(movieTmdbId, signedIn, "change");
+  updateDropdown(movieTmdbId, signedIn, "change", currentPath);
   if (currentPath == '/lists') document.location.reload();
 }
 
@@ -23,7 +24,7 @@ const removeFromList = async (movieTmdbId, watchlistItemId, currentPath) => {
   const token = document.querySelector('[name=csrf-token]').content;
   axios.defaults.headers.common['X-CSRF-TOKEN'] = token;
   await axios.delete(`/watchlist_items/${parseInt(watchlistItemId, 10)}`, {currentPath: currentPath})
-  updateDropdown(movieTmdbId, signedIn, "delete");
+  updateDropdown(movieTmdbId, signedIn, "delete", currentPath);
   if (currentPath == '/lists') document.location.reload();
 }
 
@@ -44,7 +45,7 @@ const updateList = () => {
         if (iconList.classList.contains('i-active')) {
           changeList(movieTmdbId, listId, listItemId, currentPath);
         } else {
-          addToList(iconList, movieTmdbId, listId, currentPath);
+          addToList(movieTmdbId, listId, currentPath);
         }
       });
     });
