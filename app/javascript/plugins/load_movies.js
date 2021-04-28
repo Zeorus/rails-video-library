@@ -35,6 +35,7 @@ const displayMovieCard = async (movie) => {
   const moviesContainer = document.getElementById('display-movies-container');
   const signedIn = moviesContainer.dataset.signedin;
   const movieDropdown = await buildMovieDropdown(movie.id, signedIn);
+
   const movieCard  = `<div class="movie-card">
                         <div class="img-card-container movie-link" id="movie-${movie.id}" data-movieid="${movie.id}">
                           <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}">

@@ -53,7 +53,7 @@ const buildUserLists = async (userLists, movieId) => {
   if (resultsItems.watchlist_item != null) watchlistItemId = `data-list-item-id="${resultsItems.watchlist_item.id}"`;
   
   let listMenu = ``;
-  if (userLists.user_lists != [] && resultsItems.watchlist_item == null) listMenu += `<span class="header-list">Ajouter à une liste :</span>`;
+  if (userLists.user_lists.length > 0 && resultsItems.watchlist_item == null) listMenu += `<span class="header-list">Ajouter à une liste :</span>`;
   if (userLists.user_lists.length > 1 && resultsItems.watchlist_item != null) listMenu += `<hr class="dropdown-divider">
                                                      <span class="header-list">Changer de liste :</span>`;
 
@@ -70,15 +70,16 @@ const buildUserLists = async (userLists, movieId) => {
                   </span>`;
     }
   });
-  if (userLists.user_lists != [] && resultsItems.watchlist_item == null) listMenu += `<hr class="dropdown-divider">`;
+  if (userLists.user_lists.length > 0 && resultsItems.watchlist_item == null) listMenu += `<hr class="dropdown-divider">`;
   return listMenu
 }
 
 const buildMovieDropdown = async (movieId, signedIn) => {
+
   if (signedIn == "true") {
     const resultsItems = await watchlistItemRequest(movieId);
     const resultsLists = await listsRequest();
-
+    
     const userlists = async (resultsLists) => {
       if (resultsLists.user_lists) {
         return await buildUserLists(resultsLists, movieId);
@@ -125,18 +126,13 @@ const buildMovieDropdown = async (movieId, signedIn) => {
   }
 }
 
-const updateDropdown = async (movieId, signedIn, verb, currentPath) => {
+const updateDropdown = async (movieId, signedIn, currentPath) => {
   const movieDropdown = await buildMovieDropdown(movieId, signedIn);
   const iconList = document.getElementById(`movie-dropdown-${movieId}`);
-  
+
   if (iconList != null) {
     iconList.innerHTML = "";
     iconList.insertAdjacentHTML("afterbegin", movieDropdown);
-    if (verb != "delete") {
-      iconList.classList.add('i-active');
-    } else {
-      iconList.classList.remove('i-active');
-    }
   }
 
   if (currentPath.startsWith('/movies/')) iconList.classList.add('icon-list-show');

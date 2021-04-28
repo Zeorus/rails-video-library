@@ -1,14 +1,19 @@
 <% if @lists != {} %>
   <% @lists.each do |list, movies| %>
-    <div class="dropdown list-header">
-      <h2 class="section-title"><%= list.name %></h2><i class="fas fa-edit dropdown-toggle" id="editListDropdown-<%= list.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-      <div class="dropdown-menu" aria-labelledby="editListDropdown-<%= list.id %>">
-        <span class="dropdown-item link" data-toggle="modal" data-target="#listEdit-<%= list.id %>">Renommer</span>
-        <%= link_to "Supprimer", list_path(list), method: :delete, data: { confirm: 'Êtes-vous sûr de vouloir supprimer cette liste ? Toutes les vidéos qui en font partie seront retirées.' }, class: "dropdown-item" %>
-      </div>
-    </div>
+    <details open>
+      <summary class="summary-list">
+        <div class="dropdown list-header">
+          <h2 class="section-title"><%= list.name %></h2><i class="fas fa-edit dropdown-toggle" id="editListDropdown-<%= list.id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+          <div class="dropdown-menu" aria-labelledby="editListDropdown-<%= list.id %>">
+            <span class="dropdown-item link" data-toggle="modal" data-target="#listEdit-<%= list.id %>">Renommer</span>
+            <span class="dropdown-item link delete-list-btn" data-remove-btn-list-id="<%= list.id %>">Supprimer</span>
+          </div>
+          <%= link_to "", list_path(list), method: :delete, class: "hidden", id: "remove-link-list-id-#{list.id}" %>
+        </div>
+      </summary>
 
-    <%= render 'lists/movies_list', movies: movies %>
+      <%= render 'lists/movies_list', movies: movies %>
+    </details>
 
     <div class="modal fade" id="listEdit-<%= list.id %>" tabindex="-1" aria-labelledby="editList-<%= list.id %>" aria-hidden="true">
     <div class="modal-dialog">
@@ -30,5 +35,9 @@
   </div>
   <% end %>
 <% else %>
-Aucune liste disponible.
+<p>Aucune liste disponible.</p>
 <% end %>
+
+<div class="btn btn-list" data-toggle="modal" data-target="#list" data-list="<%= @list = List.new %>">
+  Créer une nouvelle liste
+</div>
