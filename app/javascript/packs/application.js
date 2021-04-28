@@ -19,6 +19,7 @@ import "bootstrap";
 import { updateList } from "../plugins/update_list";
 // import { checkScreenSize } from "../plugins/screen_size";
 import { infiniteScroll } from "../plugins/load_movies";
+import { alertDeleteList } from "../plugins/confirm_delete_list";
 
 document.addEventListener('turbolinks:load', () => {
 
@@ -31,6 +32,8 @@ document.addEventListener('turbolinks:load', () => {
   if (document.getElementById('display-movies-container')) {
     infiniteScroll();
   }
+
+  alertDeleteList();
 
   if (document.querySelector('.carousel-item')) {
     document.querySelector('.carousel-container-1').classList.add('active');
