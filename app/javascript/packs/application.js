@@ -23,7 +23,7 @@ import { infiniteScroll } from "../plugins/load_movies";
 document.addEventListener('turbolinks:load', () => {
 
   $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-hover="tooltip"]').tooltip();
   });
 
   updateList();

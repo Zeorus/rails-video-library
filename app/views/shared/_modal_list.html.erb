@@ -9,8 +9,8 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for(@list) do |f| %>
-          <%= f.input :name, label: "Nom"%>
-          <%= f.submit class: 'btn btn-list' %>
+          <%= f.input :name, label: "Nom", required: true %>
+          <%= f.submit "Créer une liste", class: 'btn btn-list', id: "btn-create-list" %>
         <% end %>
       </div>
     </div>

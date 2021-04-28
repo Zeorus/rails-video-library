@@ -44,7 +44,7 @@ const displayMovieCard = async (movie) => {
                           <div class="d-flex">
                             <div class="movie-date">${convertDate(movie.release_date)}</div>
                             <div class="movie-user-actions">
-                              <div class="dropdown dropup" id="movie-dropdown-${movie.id}">
+                              <div class="dropdown" id="movie-dropdown-${movie.id}">
                                 ${movieDropdown}
                               </div>
                             </div>
