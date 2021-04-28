@@ -22,5 +22,5 @@ class List < ApplicationRecord
   has_many :watchlist_items, dependent: :destroy
   has_many :movies, through: :watchlist_items
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { minimum: 3 }
 end

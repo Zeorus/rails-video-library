@@ -13,10 +13,10 @@ class ListsController < ApplicationController
   def create
     @list = List.new(list_params)
     @list.user = current_user
-    if @list.save!
-      redirect_back(fallback_location: root_path, notice: "Votre liste a été créée avec succès.")
+    if @list.save
+      redirect_back(fallback_location: root_path, notice: "La liste \"#{@list.name}\" a été créée avec succès. Vous pouvez maintenant y ajouter des films.")
     else
-      redirect_back(fallback_location: root_path, notice: "Erreur, votre liste n'a pas été sauvegardée.")
+      redirect_back(fallback_location: root_path, alert: "Erreur, votre liste n'a pas été sauvegardée.")
     end
   end
 
@@ -24,7 +24,7 @@ class ListsController < ApplicationController
     if @list.update(list_params)
       redirect_back(fallback_location: root_path, notice: "Votre liste a été renommée avec succès.")
     else
-      redirect_back(fallback_location: root_path, notice: "Erreur, votre liste n'a pas été sauvegardée.")
+      redirect_back(fallback_location: root_path, alert: "Erreur, votre liste n'a pas été sauvegardée.")
     end
   end
 
@@ -36,9 +36,8 @@ class ListsController < ApplicationController
   def add_to_list
     movie = FindMovieService.new(params[:movieId].to_i).find_movie
     list = List.find(params[:listId].to_i)
-    WatchlistItem.create!(movie: movie, user: current_user, list: list)
-
-    head :created
+    WatchlistItem.create(movie: movie, user: current_user, list: list)
+    head :ok
   end
 
   def user_lists

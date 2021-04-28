@@ -26,5 +26,5 @@ class Review < ApplicationRecord
 
   validates :movie_id, uniqueness: { scope: :user_id }
   validates :rate, presence: true, numericality: { only_integer: true }, inclusion: { in: (0..5) }
-  validates :content, presence: true
+  validates :content, presence: true, length: { minimum: 3 }
 end

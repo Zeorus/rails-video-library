@@ -5,10 +5,10 @@ class ReviewsController < ApplicationController
     @movie = Movie.find(params[:movie_id])
     @review.movie = @movie
     @review.user = current_user
-    if @review.save!
+    if @review.save
       redirect_to movie_path(@movie), notice: "Votre avis a été correctement ajouté"
     else
-      render 'movies/show', notice: "Erreur, votre avis n'a pas été sauvegardé"
+      redirect_to movie_path(@movie), alert: "Erreur, votre avis n'a pas été sauvegardé"
     end
   end
 
@@ -18,7 +18,7 @@ class ReviewsController < ApplicationController
     if @review.update(review_params)
       redirect_to movie_path(@movie), notice: "Votre avis a été correctement modifié"
     else
-      redirect_to movie_path(@movie), notice: "Erreur, votre avis n'a pas été sauvegardé"
+      redirect_to movie_path(@movie), alert: "Erreur, votre avis n'a pas été sauvegardé"
     end
   end
   

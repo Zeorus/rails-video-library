@@ -98,22 +98,24 @@ const buildMovieDropdown = async (movieId, signedIn) => {
 
     if (resultsItems.watchlist_item != null) {
       const listName = await listNameRequest(resultsItems.watchlist_item.list_id);
-      return `<i class="fas fa-plus icon-list dropdown-toggle i-active" id="listDropdown-${movieId}" data-icon-movie-id="${movieId}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+      return `<i class="fas fa-plus icon-list dropdown-toggle i-active" id="listDropdown-${movieId}" data-icon-movie-id="${movieId}" data-toggle="dropdown" data-hover="tooltip" title="Gérer mes listes" aria-haspopup="true" aria-expanded="false"></i>
               <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-${movieId}">
                 <div class="header-list">Actuelle : ${listName.list_name}</div>
                 ${lists}
                 <hr class="dropdown-divider">
-                <span class="dropdown-item link dropdown-item-list" data-toggle="modal" data-target="#list">
+                <span class="dropdown-item link create-list-link" data-toggle="modal" data-target="#list">
                   Créer une nouvelle liste
                 </span>
                 <hr class="dropdown-divider">
-                <span class="dropdown-item link remove-list-link" data-watchlist-item-id="${resultsItems.watchlist_item.id}" id="remove-link-${movieId}" data-movieid="${movieId}">Retirer de la liste</span>
+                <span class="dropdown-item link remove-list-link" data-watchlist-item-id="${resultsItems.watchlist_item.id}" id="remove-link-${movieId}" data-movieid="${movieId}">
+                  Retirer de la liste
+                </span>
               </div>`;
     } else {
-      return `<i class="fas fa-plus icon-list dropdown-toggle" data-movieid="${movieId}" id="listDropdown-${movieId}" data-icon-movie-id="${movieId}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+      return `<i class="fas fa-plus icon-list dropdown-toggle" data-movieid="${movieId}" id="listDropdown-${movieId}" data-icon-movie-id="${movieId}" data-toggle="dropdown" data-hover="tooltip" title="Gérer mes listes" aria-haspopup="true" aria-expanded="false"></i>
               <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-${movieId}">
                 ${lists}
-                <span class="dropdown-item link dropdown-item-list" data-toggle="modal" data-target="#list">
+                <span class="dropdown-item link create-list-link" data-toggle="modal" data-target="#list">
                   Créer une nouvelle liste
                 </span>
               </div>`;

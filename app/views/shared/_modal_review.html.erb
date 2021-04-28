@@ -9,12 +9,12 @@
       </div>
       <div class="modal-body">
         <%= simple_form_for([movie, review]) do |f| %>
-          <%= f.input :content, as: :text, label: "Avis", class: 'input-group-text'%>
+          <%= f.input :content, as: :text, label: "Avis", class: 'input-group-text', required: true %>
           <label class="text required" for="review_content">Note <abbr title="required">*</abbr></label>
           <br>
-          <%= f.collection_radio_buttons :rate, [[1, 'Mauvais'] ,[2, 'Bof'], [3, 'Correct'], [4, 'Très Bien'], [5, 'Excellent']], :first, :last %>
+          <%= f.collection_radio_buttons :rate, [[1, 'Mauvais'] ,[2, 'Bof'], [3, 'Correct'], [4, 'Très Bien'], [5, 'Excellent']], :first, :last, required: true %>
           <br>
-          <%= f.submit class: 'btn btn-review' %>
+          <%= f.submit "Ajouter un avis" ,class: 'btn btn-review' %>
         <% end %>
       </div>
     </div>

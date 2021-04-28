@@ -10,7 +10,7 @@
       <% if user_signed_in? %>
         <div class="dropdown" id="movie-dropdown-<%= @movie.tmdb_id %>">
           <% if list_item = WatchlistItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: @movie.tmdb_id }) %>
-            <i class="fas fa-plus icon-list icon-list-show dropdown-toggle i-active" id="listDropdown-<%= @movie.tmdb_id %>" data-icon-movie-id="<%= @movie.tmdb_id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+            <i class="fas fa-plus icon-list icon-list-show dropdown-toggle i-active" id="listDropdown-<%= @movie.tmdb_id %>" data-icon-movie-id="<%= @movie.tmdb_id %>" data-toggle="dropdown" data-hover="tooltip" title="Gérer mes listes" aria-haspopup="true" aria-expanded="false"></i>
             <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-<%= @movie.tmdb_id %>">
               <div class="header-list">Actuelle : <%= list_item.list.name %></div>
               <% if current_user.lists.count > 1 %>
@@ -25,14 +25,14 @@
                 <% end %>
               <% end %>
               <hr class="dropdown-divider">
-              <span class="dropdown-item link dropdown-item-list" data-toggle="modal" data-target="#list" data-list=" <%= @list = List.new %> ">
+              <span class="dropdown-item link create-list-link" data-toggle="modal" data-target="#list" data-list="<%= @list = List.new %>">
                 Créer une nouvelle liste
               </span>
               <hr class="dropdown-divider">
               <span class="dropdown-item link remove-list-link" data-watchlist-item-id="<%= list_item.id %>" id="remove-link-<%= @movie.tmdb_id %>" data-movieid="<%= @movie.tmdb_id %>">Retirer de la liste</span>
             </div>
           <% else %>
-            <i class="fas fa-plus icon-list icon-list-show dropdown-toggle" data-movieid="<%= @movie.tmdb_id %>" id="listDropdown-<%= @movie.tmdb_id %>" data-icon-movie-id="<%= @movie.tmdb_id %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
+            <i class="fas fa-plus icon-list icon-list-show dropdown-toggle" data-movieid="<%= @movie.tmdb_id %>" id="listDropdown-<%= @movie.tmdb_id %>" data-icon-movie-id="<%= @movie.tmdb_id %>" data-toggle="dropdown" data-hover="tooltip" title="Gérer mes listes" aria-haspopup="true" aria-expanded="false"></i>
             <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-<%= @movie.tmdb_id %>">
               <% if current_user.lists != [] %>
                 <span class="header-list">Ajouter à une liste :</span>
@@ -43,7 +43,7 @@
                 <% end %>
                 <hr class="dropdown-divider">
               <% end %>
-              <span class="dropdown-item link dropdown-item-list" data-toggle="modal" data-target="#list" data-list=" <%= @list = List.new %> ">
+              <span class="dropdown-item link create-list-link" data-toggle="modal" data-target="#list" data-list="<%= @list = List.new %>">
                 Créer une nouvelle liste
               </span>
             </div>
