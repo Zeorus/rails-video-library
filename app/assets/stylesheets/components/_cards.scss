@@ -28,6 +28,12 @@
   }
 }
 
+.movie-link {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 .infos-card-container {
   display: flex;
   align-items: center;
