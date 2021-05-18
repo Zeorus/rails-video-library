@@ -5,15 +5,6 @@
   </div>
 </div>
 
-<div id="page-container" data-load="<%= @load %>"> 
-  <% if @y != 0 %>
-    <h2 class="carousel-title"><%= link_to 'Les plus populaires', mostpopularmovies_path, class: "link" %></h2>
-    <%= render '/shared/caroussel', movies: @most_popular_movies, caroussel_id: "1", i: 0, y: @y, incr: @incr %>
-    <br>
-    <h2 class="carousel-title"><%= link_to 'Meilleurs films de 2020', best2020movies_path, class: "link" %></h2>
-    <%= render '/shared/caroussel', movies: @best_2020_movies, caroussel_id: "2", i: 0, y: @y, incr: @incr %>
-    <br>
-    <h2 class="carousel-title"><%= link_to 'Les mieux notés', bestmovies_path, class: "link" %></h2>
-    <%= render '/shared/caroussel', movies: @best_movies, caroussel_id: "3", i: 0, y: @y, incr: @incr %>
-  <% end %>
-</div>
+<%= render '/shared/caroussel', movies: @most_popular_movies, caroussel_title: "Les plus populaires", path: "/mostpopularmovies", caroussel_id: "1" %>
+<%= render '/shared/caroussel', movies: @best_2020_movies, caroussel_title: "Meilleurs films de 2020", path: "/best2020movies", caroussel_id: "2" %>
+<%= render '/shared/caroussel', movies: @best_movies, caroussel_title: "Les mieux notés", path: "/bestmovies", caroussel_id: "3" %>

@@ -14,7 +14,7 @@
         <div class="content-card-container">
           <h6 class="movie-title"><%= movie["title"] %></h6>
           <div class="d-flex">
-            <% if movie["release_date"] != "" %>
+            <% if movie["release_date"] != nil && movie["release_date"] != "" %>
               <div class="movie-date"><%= Date.strptime(movie["release_date"], '%Y-%m-%d').strftime('%d/%m/%Y') %></div>
             <% end %>
             <div class="movie-user-actions">

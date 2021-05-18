@@ -1,0 +1,100 @@
+<div class="row d-flex align-items-center caroussel-movie">
+  <div class="d-flex align-items-center btn-caroussel-left">
+      <a href="#carouselIndicators<%= caroussel_id %>" role="button" data-slide="prev">
+        <div class="carousel-nav-icon">
+          <i class="fas fa-chevron-left"></i>
+        </div>
+      </a>
+  </div>
+  <div class="col-12">
+      <!--Start carousel-->
+      <div id="carouselIndicators<%= caroussel_id %>" class="carousel slide" data-ride="false" data-bs-interval="7000" data-bs-wrap="false">
+        <div class="carousel-inner">
+          <% while y <= movies.length - 1 %>
+            <div class="carousel-item carousel-container-<%= caroussel_id %>">
+              <div class="row">
+                <div class="col-12 caroussel-row">
+                  <% movies[i..y].each do |movie| %>
+                    <div class="movie-card">
+                      <div class="img-card-container">
+                        <%= link_to findorcreate_path(movie: movie) do %>
+                          <% if movie["poster_path"] != nil %>
+                            <%= image_tag("https://image.tmdb.org/t/p/w500#{movie['poster_path']}") %>
+                          <% else %>
+                            <%= image_tag("missing_img") %>
+                          <% end %>
+                        <% end %>
+                      </div>
+                      <div class="content-card-container">
+                        <h6 class="movie-title"><%= movie["title"] %></h6>
+                        <div class="infos-card-container">
+                          <% if movie["release_date"] != nil && movie["release_date"] != "" %>
+                            <div class="movie-date"><%= Date.strptime(movie["release_date"], '%Y-%m-%d').strftime('%d/%m/%Y') %></div>
+                          <% end %>
+                          <div class="movie-user-actions">
+                            <% if user_signed_in? %>
+                              <div class="dropdown" id="movie-dropdown-<%= movie["id"] %>">
+                                <% if list_item = WatchlistItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie["id"] }) %>
+                                  <i class="fas fa-plus icon-list dropdown-toggle i-active" id="listDropdown-<%= movie["id"] %>" data-icon-movie-id="<%= movie["id"] %>" data-toggle="dropdown" data-hover="tooltip" title="Gérer mes listes" aria-haspopup="true" aria-expanded="false"></i>
+                                  <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-<%= movie["id"] %>">
+                                    <div class="header-list">Actuelle : <%= list_item.list.name %></div>
+                                    <% if current_user.lists.count > 1 %>
+                                      <hr class="dropdown-divider">
+                                      <span class="header-list">Changer de liste :</span>
+                                      <% current_user.lists.each do |list| %>
+                                        <% if list_item.list != list %>
+                                          <span class="dropdown-item link dropdown-item-list" data-list-id="<%= list.id %>" data-movieid="<%= movie["id"] %>" data-list-item-id="<%= list_item.id %>">
+                                            <%= list.name %>
+                                          </span>
+                                        <% end %>
+                                      <% end %>
+                                    <% end %>
+                                    <hr class="dropdown-divider">
+                                    <span class="dropdown-item link create-list-link" data-toggle="modal" data-target="#list" data-list="<%= @list = List.new %>">
+                                      Créer une nouvelle liste
+                                    </span>
+                                    <hr class="dropdown-divider">
+                                    <span class="dropdown-item link remove-list-link" data-watchlist-item-id="<%= list_item.id %>" id="remove-link-<%= movie["id"] %>" data-movieid="<%= movie["id"] %>">Retirer de la liste</span>
+                                  </div>
+                                <% else %>
+                                  <i class="fas fa-plus icon-list dropdown-toggle" data-movieid="<%= movie["id"] %>" id="listDropdown-<%= movie["id"] %>" data-icon-movie-id="<%= movie["id"] %>" data-toggle="dropdown" data-hover="tooltip" title="Gérer mes listes" aria-haspopup="true" aria-expanded="false"></i>
+                                  <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-<%= movie["id"] %>">
+                                    <% if current_user.lists != [] %>
+                                      <span class="header-list">Ajouter à une liste :</span>
+                                      <% current_user.lists.each do |list| %>
+                                        <span class="dropdown-item link dropdown-item-list" data-list-id="<%= list.id %>" data-movieid="<%= movie["id"] %>">
+                                          <%= list.name %>
+                                        </span>
+                                      <% end %>
+                                      <hr class="dropdown-divider">
+                                    <% end %>
+                                    <span class="dropdown-item link create-list-link" data-toggle="modal" data-target="#list" data-list="<%= @list = List.new %>">
+                                      Créer une nouvelle liste
+                                    </span>
+                                  </div>
+                                <% end %>
+                              </div>
+                            <% end %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <% i += incr %>
+            <% y += incr %>
+          <% end %>
+        </div>
+      </div>
+      <!--End carousel-->
+  </div>
+  <div class="d-flex align-items-center justify-content-center btn-caroussel-right">
+    <a  href="#carouselIndicators<%= caroussel_id %>" data-slide="next">
+      <div class="carousel-nav-icon">
+        <i class="fas fa-chevron-right"></i>
+      </div>
+    </a>
+  </div>
+</div>
