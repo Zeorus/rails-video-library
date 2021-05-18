@@ -1,73 +1,85 @@
-.caroussel-movie {
-  position: relative;
-}
-
-.btn-caroussel-left {
-  position: absolute;
-  left: -20px;
-}
-
-.btn-caroussel-right {
-  position: absolute;
-  right: -20px;
-}
-
-.carousel-nav-icon {
-  i {
-    font-size: 32px;
-    color: white;
-  }
-}
-.carousel-item {
-  .col, .col-sm, .col-md {
-    width: 145px;
-    height: 200px;
-  }
-}
-
-.caroussel-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  padding: 0 !important;
-  height: 310px;
-}
-
-.carousel-inner {
-  overflow: visible !important;
-}
-
-@media(max-width: 1500px) {
-  .caroussel-row {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  }
-}
-
-@media(max-width: 1200px) {
-  .caroussel-row {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  }
-}
-
-@media(max-width: 1000px) {
-  .caroussel-row {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  }
-}
-
-@media(max-width: 875px) {
-  .caroussel-row {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
+.caroussel {
+  padding: 16px 30px 0 30px;
 }
 
 @media(max-width: 750px) {
-  .caroussel-row {
-    grid-template-columns: 1fr 1fr 1fr;
+  .caroussel {
+    padding: 16px 0 0 0;
   }
 }
 
-@media(max-width: 560px) {
-  .caroussel-row {
-    grid-template-columns: 1fr 1fr;
+.caroussel-movie {
+  .slick-dots {
+    display: none !important;
   }
 }
+
+// .btn-caroussel-left {
+//   position: absolute;
+//   left: -20px;
+// }
+
+// .btn-caroussel-right {
+//   position: absolute;
+//   right: -20px;
+// }
+
+// .carousel-nav-icon {
+//   i {
+//     font-size: 32px;
+//     color: white;
+//   }
+// }
+// .carousel-item {
+//   .col, .col-sm, .col-md {
+//     width: 145px;
+//     height: 200px;
+//   }
+// }
+
+// // .caroussel-row {
+// //   display: grid;
+// //   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+// //   padding: 0 !important;
+// //   height: 310px;
+// // }
+
+// .carousel-inner {
+//   overflow: visible !important;
+// }
+
+// @media(max-width: 1500px) {
+//   .caroussel-row {
+//     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+//   }
+// }
+
+// @media(max-width: 1200px) {
+//   .caroussel-row {
+//     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+//   }
+// }
+
+// @media(max-width: 1000px) {
+//   .caroussel-row {
+//     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+//   }
+// }
+
+// @media(max-width: 875px) {
+//   .caroussel-row {
+//     grid-template-columns: 1fr 1fr 1fr 1fr;
+//   }
+// }
+
+// @media(max-width: 750px) {
+//   .caroussel-row {
+//     grid-template-columns: 1fr 1fr 1fr;
+//   }
+// }
+
+// @media(max-width: 560px) {
+//   .caroussel-row {
+//     grid-template-columns: 1fr 1fr;
+//   }
+// }
