@@ -8,54 +8,39 @@ class PagesController < ApplicationController
   before_action :set_url
 
   def home
-    @y = 7
-    @load = "true"
-    @incr = @y + 1
+    @lists = current_user.lists if user_signed_in?
     @most_popular_movies = parse_url("#{@base_url}&sort_by=popularity.desc")['results'] + parse_url("#{@base_url}&sort_by=popularity.desc&page=2")['results']
     @best_2020_movies = parse_url("#{@base_url}&year=2020&sort_by=popularity.desc")['results'] + parse_url("#{@base_url}&year=2020&sort_by=popularity.desc&page=2")['results']
     @best_movies = parse_url("#{@base_url}&vote_count.gte=500&sort_by=vote_average.desc")['results'] + parse_url("#{@base_url}&vote_count.gte=500&sort_by=vote_average.desc&page=2")['results']
   end
 
   def most_popular_movies
+    @lists = current_user.lists if user_signed_in?
     @search = "sort_by=popularity.desc"
     @movies = parse_url("#{@base_url}&#{@search}")['results'] + parse_url("#{@base_url}&#{@search}&page=2")['results']
     render 'shared/_movies'
   end
 
   def best_2020_movies
+    @lists = current_user.lists if user_signed_in?
     @search = "year=2020&sort_by=popularity.desc"
     @movies = parse_url("#{@base_url}&#{@search}")['results'] + parse_url("#{@base_url}&#{@search}&page=2")['results']
     render 'shared/_movies'
   end
 
   def best_movies
+    @lists = current_user.lists if user_signed_in?
     @search = "vote_count.gte=500&sort_by=vote_average.desc"
     @movies = parse_url("#{@base_url}&#{@search}")['results'] + parse_url("#{@base_url}&#{@search}&page=2")['results']
     render 'shared/_movies'
   end
 
   def movies_by_genre
+    @lists = current_user.lists if user_signed_in?
     @search = "with_genres=#{params[:id]}"
     @movies = parse_url("#{@base_url}&#{@search}&sort_by=popularity.desc")['results'] + parse_url("#{@base_url}&#{@search}&sort_by=popularity.desc&page=2")['results']
     render 'shared/_movies'
   end
-
-  # def home
-  #   @y = params[:y].to_i
-  #   if @y == 0
-  #     @load = "false"
-  #   else
-  #     @load = "true"
-  #     @incr = @y + 1
-  #     @most_popular_movies = parse_url("#{@base_url}&sort_by=popularity.desc")['results'] + parse_url("#{@base_url}&sort_by=popularity.desc&page=2")['results']
-  #     @best_2020_movies = parse_url("#{@base_url}&year=2020&sort_by=popularity.desc")['results'] + parse_url("#{@base_url}&year=2020&sort_by=popularity.desc&page=2")['results']
-  #     @best_movies = parse_url("#{@base_url}&vote_count.gte=500&sort_by=vote_average.desc")['results'] + parse_url("#{@base_url}&vote_count.gte=500&sort_by=vote_average.desc&page=2")['results']
-  #   end
-  # end
-
-  # def load_carrousel
-  #   redirect_to root_path(y: params[:y].to_i)
-  # end
 
   private
 

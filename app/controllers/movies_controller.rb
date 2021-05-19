@@ -8,10 +8,12 @@ class MoviesController < ApplicationController
 
     search = Tmdb::Search.new.resource('movie').query(params[:query])
     @results = search.fetch
+    @lists = current_user.lists if user_signed_in?
   end
 
   def show
     @movie = Movie.find(params[:id])
+    @lists = current_user.lists if user_signed_in?
     @youtube_videos = YoutubeVideoIdService.new(@movie.title).find_video
     if user_signed_in?
       @review = Review.joins(:movie).find_by(user_id: current_user.id, movie: { id: @movie.id })

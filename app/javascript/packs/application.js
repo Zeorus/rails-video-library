@@ -17,7 +17,6 @@ import "bootstrap";
 
 // Internal imports
 import { updateList } from "../plugins/update_list";
-// import { checkScreenSize } from "../plugins/screen_size";
 import { infiniteScroll } from "../plugins/load_movies";
 import { alertDeleteList } from "../plugins/confirm_delete_list";
 
@@ -28,7 +27,6 @@ document.addEventListener('turbolinks:load', () => {
   });
 
   updateList();
-  // checkScreenSize();
   if (document.getElementById('display-movies-container')) {
     infiniteScroll();
   }
