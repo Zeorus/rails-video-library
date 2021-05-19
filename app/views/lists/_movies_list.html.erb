@@ -14,7 +14,7 @@
         <div class="content-card-container">
           <h6 class="movie-title"><%= movie.title %></h6>
           <div class="d-flex">
-            <div class="movie-date"><%= Date.strptime(movie.year, '%Y-%m-%d').strftime('%d/%m/%Y') %></div>
+            <div class="movie-date"><%= Date.strptime(movie.year, '%Y-%m-%d').strftime('%d/%m/%Y') if movie.year != nil && movie.year != "" %></div>
             <div class="movie-user-actions">
               <div class="dropdown">
                 <% list_item = WatchlistItem.joins(:movie).find_by(user_id: current_user.id, movie: { tmdb_id: movie.tmdb_id }) %>

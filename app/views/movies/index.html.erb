@@ -14,9 +14,7 @@
         <div class="content-card-container">
           <h6 class="movie-title"><%= movie["title"] %></h6>
           <div class="d-flex">
-            <% if movie["release_date"] != nil && movie["release_date"] != "" %>
-              <div class="movie-date"><%= Date.strptime(movie["release_date"], '%Y-%m-%d').strftime('%d/%m/%Y') %></div>
-            <% end %>
+            <div class="movie-date"><%= Date.strptime(movie["release_date"], '%Y-%m-%d').strftime('%d/%m/%Y') if movie["release_date"] != nil && movie["release_date"] != "" %></div>
             <div class="movie-user-actions">
               <% if user_signed_in? %>
                 <div class="dropdown" id="movie-dropdown-<%= movie["id"] %>">
@@ -24,10 +22,10 @@
                     <i class="fas fa-plus icon-list dropdown-toggle i-active" id="listDropdown-<%= movie["id"] %>" data-icon-movie-id="<%= movie["id"] %>" data-toggle="dropdown" data-hover="tooltip" title="Gérer mes listes" aria-haspopup="true" aria-expanded="false"></i>
                     <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-<%= movie["id"] %>">
                       <div class="header-list">Actuelle : <%= list_item.list.name %></div>
-                      <% if current_user.lists.count > 1 %>
+                      <% if @lists.count > 1 %>
                         <hr class="dropdown-divider">
                         <span class="header-list">Changer de liste :</span>
-                        <% current_user.lists.each do |list| %>
+                        <% @lists.each do |list| %>
                           <% if list_item.list != list %>
                             <span class="dropdown-item link dropdown-item-list" data-list-id="<%= list.id %>" data-movieid="<%= movie["id"] %>" data-list-item-id="<%= list_item.id %>">
                               <%= list.name %>
@@ -45,9 +43,9 @@
                   <% else %>
                     <i class="fas fa-plus icon-list dropdown-toggle" data-movieid="<%= movie["id"] %>" id="listDropdown-<%= movie["id"] %>" data-icon-movie-id="<%= movie["id"] %>" data-toggle="dropdown" data-hover="tooltip" title="Gérer mes listes" aria-haspopup="true" aria-expanded="false"></i>
                     <div class="dropdown-menu dropdown-menu-list" aria-labelledby="listDropdown-<%= movie["id"] %>">
-                      <% if current_user.lists != [] %>
+                      <% if @lists != [] %>
                         <span class="header-list">Ajouter à une liste :</span>
-                        <% current_user.lists.each do |list| %>
+                        <% @lists.each do |list| %>
                           <span class="dropdown-item link dropdown-item-list" data-list-id="<%= list.id %>" data-movieid="<%= movie["id"] %>">
                             <%= list.name %>
                           </span>
