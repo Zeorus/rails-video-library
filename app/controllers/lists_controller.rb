@@ -1,5 +1,5 @@
 class ListsController < ApplicationController
-  before_action :find_list, only: [ :update, :destroy ]
+  before_action :find_list, only: %i[update destroy]
 
   def index
     @lists = {}
@@ -14,7 +14,8 @@ class ListsController < ApplicationController
     @list = List.new(list_params)
     @list.user = current_user
     if @list.save
-      redirect_back(fallback_location: root_path, notice: "La liste \"#{@list.name}\" a été créée avec succès. Vous pouvez maintenant y ajouter des films.")
+      redirect_back(fallback_location: root_path, 
+                    notice: "La liste \"#{@list.name}\" a été créée avec succès. Vous pouvez maintenant y ajouter des films.")
     else
       redirect_back(fallback_location: root_path, alert: "Erreur, votre liste n'a pas été sauvegardée.")
     end
@@ -22,7 +23,7 @@ class ListsController < ApplicationController
 
   def update
     if @list.update(list_params)
-      redirect_back(fallback_location: root_path, notice: "Votre liste a été renommée avec succès.")
+      redirect_back(fallback_location: root_path, notice: 'Votre liste a été renommée avec succès.')
     else
       redirect_back(fallback_location: root_path, alert: "Erreur, votre liste n'a pas été sauvegardée.")
     end
@@ -30,7 +31,7 @@ class ListsController < ApplicationController
 
   def destroy
     @list.destroy
-    redirect_back(fallback_location: root_path, notice: "Votre liste a été supprimée avec succès.")
+    redirect_back(fallback_location: root_path, notice: 'Votre liste a été supprimée avec succès.')
   end
 
   def add_to_list

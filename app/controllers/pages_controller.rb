@@ -16,21 +16,21 @@ class PagesController < ApplicationController
 
   def most_popular_movies
     @lists = current_user.lists if user_signed_in?
-    @search = "sort_by=popularity.desc"
+    @search = 'sort_by=popularity.desc'
     @movies = parse_url("#{@base_url}&#{@search}")['results'] + parse_url("#{@base_url}&#{@search}&page=2")['results']
     render 'shared/_movies'
   end
 
   def best_2020_movies
     @lists = current_user.lists if user_signed_in?
-    @search = "year=2020&sort_by=popularity.desc"
+    @search = 'year=2020&sort_by=popularity.desc'
     @movies = parse_url("#{@base_url}&#{@search}")['results'] + parse_url("#{@base_url}&#{@search}&page=2")['results']
     render 'shared/_movies'
   end
 
   def best_movies
     @lists = current_user.lists if user_signed_in?
-    @search = "vote_count.gte=500&sort_by=vote_average.desc"
+    @search = 'vote_count.gte=500&sort_by=vote_average.desc'
     @movies = parse_url("#{@base_url}&#{@search}")['results'] + parse_url("#{@base_url}&#{@search}&page=2")['results']
     render 'shared/_movies'
   end

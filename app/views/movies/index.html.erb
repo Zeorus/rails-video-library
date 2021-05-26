@@ -1,5 +1,5 @@
 <div id="results-container">
-  <% if  @results != nil %>
+  <% if  @results != [] %>
     <% @results.each do |movie| %>
       <div class="movie-card">
         <%= link_to findorcreate_path(movie: movie) do %>

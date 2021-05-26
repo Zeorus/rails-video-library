@@ -5,11 +5,11 @@
     <% end %>
 
     <ul class="navbar-menu">
-      <li class="navbar-option <%= 'active' if current_page?(root_path) %>">
+      <li id="home-link" class="navbar-option <%= 'active' if current_page?(root_path) %>">
         <%= link_to "Accueil", "/" %>
       </li>
         <li class="navbar-option <%= 'active' if current_page?(lists_path) %>">
-          <%= link_to "<i class='fas fa-video'></i> Ma Vidéothèque".html_safe, lists_path %>
+          <%= link_to "<i class='fas fa-video'></i> <span id='video-link'>Ma Vidéothèque</span>".html_safe, lists_path %>
         </li>
       <li>
         <div class="drop-genres">
@@ -42,7 +42,9 @@
     </ul>
   </div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <%# <div class="collapse navbar-collapse" id="navbarSupportedContent"></div> %>
+
+  <div>
     <ul class="navbar-nav mr-auto">
       <div id="movies-searchbar">
         <%= form_tag movies_path, method: :get do %>
@@ -52,15 +54,15 @@
             class: "input-form",
             placeholder: "Rechercher un film"
             %>
-            <button type="submit">
-              <i class="fas fa-search"></i>
-            </button>
           </div>
         <% end %>
+        <div class="mobile-search">
+          <i class="fas fa-search" data-toggle="modal" data-target="#search"></i>
+        </div>
       </div>
-      
+    
       <% if user_signed_in? %>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown dropdown-navbar">
           <% if current_user.avatar.attached? %>
             <%= cl_image_tag current_user.avatar.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <% else %>
