@@ -61,7 +61,9 @@
       <%= @movie.runtime %> min
     </div>
     <% if @youtube_videos != [] %>
-      <iframe width="558" height="308" src="https://www.youtube.com/embed/<%= @youtube_videos[0]['id']['videoId'] %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div id="trailer-movie-container">
+        <iframe src="https://www.youtube.com/embed/<%= @youtube_videos[0]['id']['videoId'] %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     <% end %>
     <p id="show-movie-tagline"><%= @movie.tagline %></p>
     <h2 class="show-movie-subtitle">Sinopsis</h2>

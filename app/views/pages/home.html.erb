@@ -1,8 +1,11 @@
 <div id="banner-section">
-  <div id="banner-titles">
+  <div>
     <h1>Ma Vidéothèque</h1>
-    <h2>Chercher, noter, trier mes films préférés </h2>
   </div>
+  <%# <div id="banner-titles">
+    <h1>Ma Vidéothèque</h1> %>
+    <%# <h2>Chercher, noter, trier mes films préférés </h2> %>
+  <%# </div> %>
 </div>
 
 <%= render '/shared/caroussel', movies: @most_popular_movies, caroussel_title: "Les plus populaires", path: "/mostpopularmovies", caroussel_id: "1" %>

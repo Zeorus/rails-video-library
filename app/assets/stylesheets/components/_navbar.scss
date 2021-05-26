@@ -8,8 +8,12 @@
   z-index: 100;
 }
 
-.navbar .navbar-collapse {
+.navbar {
   flex-grow: 0;
+}
+
+.navbar-collapse {
+  flex-grow: 1;
 }
 
 .fa-film {
@@ -58,14 +62,20 @@
   }
 }
 
-.laptop-searchbar {
+.navbar-nav {
   display: flex;
-  height: 32px;
-  width: 100%;
-  margin-right: 120px;
-  
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row !important;
+}
+
+#movies-searchbar {
+  margin-right: 1.5rem;
+}
+
+.laptop-searchbar {
   input {
-    width: 240px;
+    max-width: 200px;
     padding: 0 8px;
     color: white;
     background-color: black;
@@ -73,10 +83,17 @@
   }
 }
 
-.navbar-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.mobile-search {
+  display: none;
+
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}
+
+.modal-input-form {
+  width: 100%;
 }
 
 .drop-genres {
@@ -96,6 +113,12 @@
   }
 }
 
+.dropdown-navbar {
+  .dropdown-menu {
+    position: absolute;
+  }
+}
+
 .dropdown-menu {
   background-color: black;
   opacity: 0.8;
@@ -111,5 +134,35 @@
 
   &:hover {
     opacity: 1;
+  }
+}
+
+@media(max-width: 1000px) {
+  .navbar {
+    padding: 0 10px;
+  }
+}
+
+@media(max-width: 800px) {
+  #video-link {
+    display: none;
+  }
+}
+
+@media(max-width: 700px) {
+  .navbar-menu {
+    margin-left: 8px;
+  }
+  #home-link {
+    display: none;
+  }
+}
+
+@media(max-width: 600px) {
+  .laptop-searchbar {
+    display: none;
+  }
+  .mobile-search {
+    display: block;
   }
 }

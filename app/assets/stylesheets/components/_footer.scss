@@ -11,3 +11,9 @@
     height: 68px;
   }
 }
+
+@media(max-width: 1000px) {
+  #footer {
+    padding: 0 10px;
+  }
+}

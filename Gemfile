@@ -5,7 +5,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
+gem 'cloudinary', '~> 1.16.0'
 gem 'autoprefixer-rails'
+gem 'devise-i18n'
+gem 'postmark-rails'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'font-awesome-sass'
@@ -21,9 +24,7 @@ gem 'simple_form'
 gem 'themoviedb'
 gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 5.0'
-gem 'cloudinary', '~> 1.16.0'
-gem 'postmark-rails'
-gem 'devise-i18n'
+
 
 group :development, :test do
   gem 'brakeman' # https://github.com/presidentbeef/brakeman
