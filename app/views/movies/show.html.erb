@@ -66,7 +66,7 @@
       </div>
     <% end %>
     <p id="show-movie-tagline"><%= @movie.tagline %></p>
-    <h2 class="show-movie-subtitle">Sinopsis</h2>
+    <h2 class="show-movie-subtitle">Synopsis</h2>
     <p id="show-movie-sinopsis"><%= @movie.sinopsis %></p>
     <% if user_signed_in? && WatchlistItem.find_by(user: current_user, movie: @movie) %>
       <h2 class="show-movie-subtitle">Mon avis <i class="fas fa-edit" title="Écrire un avis" data-toggle="tooltip" id="btn-write-review"></i></h2>

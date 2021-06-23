@@ -10,6 +10,12 @@
     width: 145px;
     height: 200px;
     border-radius: 4px;
+
+    &:hover {
+      // box-shadow: 5px 5px 15px 5px #FFFFFF;
+      width: 160px;
+      height: 220px;
+    }
   }
 }
 
