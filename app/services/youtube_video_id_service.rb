@@ -15,7 +15,8 @@ class YoutubeVideoIdService
   private
 
   def parse_url(url)
-    response = open(url).read
+    # response = open(url).read
+    response = Net::HTTP.get(URI.parse(url))
     JSON.parse(response)
   end
 end

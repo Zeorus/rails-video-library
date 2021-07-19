@@ -60,7 +60,7 @@
       <i class="fas fa-circle"></i>
       <%= @movie.runtime %> min
     </div>
-    <% if @youtube_videos != [] %>
+    <% if @youtube_videos != [] && @youtube_videos != nil %>
       <div id="trailer-movie-container">
         <iframe src="https://www.youtube.com/embed/<%= @youtube_videos[0]['id']['videoId'] %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
