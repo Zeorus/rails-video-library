@@ -9,7 +9,7 @@ class YoutubeVideoIdService
   def find_video
     query = @movie_title.parameterize(separator: '+', preserve_case: false)
     base_url = "https://www.googleapis.com/youtube/v3/search/?key=#{ENV['YOUTUBE_API_KEY']}&part=snippet&q=bande+annonce+fr+#{query}"
-    youtube_videos = parse_url(base_url)['items']
+    youtube_videos = parse_url("#{base_url}")['items']
   end
 
   private
